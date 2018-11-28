@@ -13,6 +13,8 @@ public class Calendar
 	private ArrayList<String> monthList;
 	private boolean validMonth;
 	private boolean validYear;
+	private int[] monthsWith31Days;
+	private int[] monthsWith30Days;
 	
 
 	public Calendar()
@@ -117,7 +119,7 @@ public class Calendar
 			}
 			if(isNumber)
 			{
-				if(yearNumber < 1582)
+				if(yearNumber < 1583)
 				{
 					JOptionPane.showMessageDialog(null,"Year doesn't exist","ERROR",JOptionPane.ERROR_MESSAGE);
 				}
@@ -128,6 +130,60 @@ public class Calendar
 				}
 			}
 		}
+	}
+	
+	private boolean isLeapYear(int year)
+	{
+		boolean isLeap = false;
+		
+		if(year % 4 == 0)
+		{
+			if(year % 100 == 0)
+			{
+				if(year % 400 == 0)
+				{
+					isLeap = true;
+				}
+			}
+			else
+			{
+				isLeap = true;
+			}
+		}
+		
+		return isLeap;
+	}
+	private void calculateDays()
+	{
+		
+	}
+	private int daysInYear()
+	{
+		int daysSince = 0;
+		for(int currentYear = 1583; currentYear < year; currentYear++)
+		{
+			if(isLeapYear(currentYear))
+			{
+				daysSince += 366;
+			}
+			else
+			{
+				daysSince += 365;
+			}
+		}
+		
+		return daysSince;
+	}
+	private int daysInMonth()
+	{
+		int daysSince = 0;
+		
+		for(int currentMonth = 1; currentMonth < month; currentMonth++)
+		{
+			
+		}
+		
+		return daysSince;
 	}
 
 	// --[GET]--
