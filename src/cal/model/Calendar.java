@@ -44,14 +44,15 @@ public class Calendar
 	public void calculateMonth(String input)
 	{
 		int monthNumber = 0;
-		
-		input = input.trim().toLowerCase();
+		boolean isNumber = false;
+
 		if (input == null || input.equals(""))
 		{
-			JOptionPane.showMessageDialog(null, "Please enter something");
+			JOptionPane.showMessageDialog(null, "Please enter something", "ERROR", JOptionPane.WARNING_MESSAGE);
 		}
 		else
 		{
+			input = input.trim().toLowerCase();
 			for (int index = 0; index < monthList.size(); index++)
 			{
 				String currentMonth = monthList.get(index).toLowerCase();
@@ -67,20 +68,24 @@ public class Calendar
 				try
 				{
 					monthNumber = Integer.parseInt(input);
+					isNumber = true;
 				}
 				catch (NumberFormatException wrong)
 				{
-					JOptionPane.showMessageDialog(null, "Please try again");
+					JOptionPane.showMessageDialog(null, "Please try again","ERROR",JOptionPane.WARNING_MESSAGE);
 				}
-				
-				if(monthNumber <= 0 || monthNumber > 12)
+
+				if (isNumber)
 				{
-					JOptionPane.showMessageDialog(null, "Month doesn't exist");
-				}
-				else
-				{
-					setMonth(monthNumber);
-					setValidMonth(true);
+					if (monthNumber <= 0 || monthNumber > 12)
+					{
+						JOptionPane.showMessageDialog(null, "Month doesn't exist", "ERROR", JOptionPane.ERROR_MESSAGE);
+					}
+					else
+					{
+						setMonth(monthNumber);
+						setValidMonth(true);
+					}
 				}
 			}
 		}
