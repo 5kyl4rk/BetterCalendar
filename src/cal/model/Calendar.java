@@ -13,9 +13,8 @@ public class Calendar
 	private ArrayList<String> monthList;
 	private boolean validMonth;
 	private boolean validYear;
-	private int[] monthsWith31Days;
-	private int[] monthsWith30Days;
-	
+	private int[] months31Days;
+	private int[] months30Days;
 
 	public Calendar()
 	{
@@ -26,10 +25,13 @@ public class Calendar
 		monthList = new ArrayList<String>(13);
 		validMonth = false;
 		validYear = false;
+		months31Days = new int[7];
+		months30Days = new int[4];
 		buildMonths();
+
 	}
 
-	private void buildMonths() //index matches actual month
+	private void buildMonths() // index matches actual month
 	{
 		monthList.add(0, "WhatMonth?");
 		monthList.add(1, "January");
@@ -44,6 +46,19 @@ public class Calendar
 		monthList.add(10, "October");
 		monthList.add(11, "November");
 		monthList.add(12, "December");
+
+		months31Days[0] = 1;
+		months31Days[1] = 3;
+		months31Days[2] = 5;
+		months31Days[3] = 7;
+		months31Days[4] = 8;
+		months31Days[5] = 10;
+		months31Days[6] = 12;
+
+		months30Days[0] = 4;
+		months30Days[1] = 6;
+		months30Days[2] = 9;
+		months30Days[3] = 11;
 	}
 
 	public void processMonth(String input)
@@ -77,7 +92,7 @@ public class Calendar
 				}
 				catch (NumberFormatException wrong)
 				{
-					JOptionPane.showMessageDialog(null, "Try again!","ERROR",JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Try again!", "ERROR", JOptionPane.WARNING_MESSAGE);
 				}
 
 				if (isNumber)
@@ -96,15 +111,15 @@ public class Calendar
 		}
 
 	}
-	
+
 	public void processYear(String input)
 	{
 		int yearNumber = 0;
 		boolean isNumber = false;
-		
-		if(input == null || input.equals(""))
+
+		if (input == null || input.equals(""))
 		{
-			JOptionPane.showMessageDialog(null,"Please enter something","ERROR",JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Please enter something", "ERROR", JOptionPane.WARNING_MESSAGE);
 		}
 		else
 		{
@@ -113,15 +128,15 @@ public class Calendar
 				yearNumber = Integer.parseInt(input);
 				isNumber = true;
 			}
-			catch(NumberFormatException nope)
+			catch (NumberFormatException nope)
 			{
-				JOptionPane.showMessageDialog(null,"Try Again!","ERROR",JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Try Again!", "ERROR", JOptionPane.WARNING_MESSAGE);
 			}
-			if(isNumber)
+			if (isNumber)
 			{
-				if(yearNumber < 1583)
+				if (yearNumber < 1583)
 				{
-					JOptionPane.showMessageDialog(null,"Year doesn't exist","ERROR",JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Year doesn't exist", "ERROR", JOptionPane.ERROR_MESSAGE);
 				}
 				else
 				{
@@ -131,16 +146,16 @@ public class Calendar
 			}
 		}
 	}
-	
+
 	private boolean isLeapYear(int year)
 	{
 		boolean isLeap = false;
-		
-		if(year % 4 == 0)
+
+		if (year % 4 == 0)
 		{
-			if(year % 100 == 0)
+			if (year % 100 == 0)
 			{
-				if(year % 400 == 0)
+				if (year % 400 == 0)
 				{
 					isLeap = true;
 				}
@@ -150,19 +165,42 @@ public class Calendar
 				isLeap = true;
 			}
 		}
-		
+
 		return isLeap;
 	}
-	private void calculateDays()
+
+	private String printDays()
 	{
-		
+		int dayStart = 6;
+		String days = "";
+		dayStart += addDaysSinceYear() + addDaysSinceMonth();
+
+		for (int index = 1; index <= daysInMonth(month); index++)
+		{
+			if (index < 10)
+			{
+				days += ("|" + index + " ");
+			}
+			if (index >= 10)
+			{
+				days += ("|" + index);
+			}
+			if (index % 7 == (7 - (dayStart % 7)))
+			{
+				days += "|\n";
+			}
+		}
+
+		return days;
+
 	}
-	private int daysInYear()
+
+	private int addDaysSinceYear()
 	{
 		int daysSince = 0;
-		for(int currentYear = 1583; currentYear < year; currentYear++)
+		for (int currentYear = 1583; currentYear < year; currentYear++)
 		{
-			if(isLeapYear(currentYear))
+			if (isLeapYear(currentYear))
 			{
 				daysSince += 366;
 			}
@@ -171,19 +209,62 @@ public class Calendar
 				daysSince += 365;
 			}
 		}
-		
+
 		return daysSince;
 	}
-	private int daysInMonth()
+
+	private int addDaysSinceMonth()
 	{
 		int daysSince = 0;
-		
-		for(int currentMonth = 1; currentMonth < month; currentMonth++)
+
+		for (int currentMonth = 1; currentMonth < month; currentMonth++)
 		{
-			
+			daysSince += daysInMonth(currentMonth);
 		}
-		
+
 		return daysSince;
+	}
+
+	private int daysInMonth(int month)
+	{
+		int numberOfDays = 0;
+
+		if (month == 2)
+		{
+			if (isLeapYear(year))
+			{
+				numberOfDays = 29;
+			}
+			else
+			{
+				numberOfDays = 28;
+			}
+		}
+		else
+		{
+			for (int indexedMonth : months31Days)
+			{
+				if (month == indexedMonth)
+				{
+					numberOfDays = 31;
+				}
+			}
+			for (int indexedMonth : months30Days)
+			{
+				if (month == indexedMonth)
+				{
+					numberOfDays = 30;
+				}
+			}
+		}
+
+		return numberOfDays;
+	}
+	
+
+	public String toString()
+	{
+		return printDays();
 	}
 
 	// --[GET]--
@@ -201,11 +282,12 @@ public class Calendar
 	{
 		return validMonth;
 	}
-	
+
 	public boolean getValidYear()
 	{
 		return validYear;
 	}
+
 	// --[SET]--
 	public void setMonth(int month)
 	{
@@ -221,7 +303,7 @@ public class Calendar
 	{
 		this.validMonth = valid;
 	}
-	
+
 	public void setValidYear(boolean valid)
 	{
 		validYear = valid;
