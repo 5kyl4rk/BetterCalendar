@@ -20,13 +20,21 @@ public class CalController
 	private void inputData()
 	{
 		String inputMonth;
+		String inputYear;
 		
 		while (!appCalendar.getValidMonth())
 		{
 			inputMonth = JOptionPane.showInputDialog(null, "Please enter a month:", "[Enter Month]", JOptionPane.QUESTION_MESSAGE);
-			appCalendar.calculateMonth(inputMonth);
+			appCalendar.processMonth(inputMonth);
 			
 		}
+		
+		while(!appCalendar.getValidYear())
+		{
+			inputYear = JOptionPane.showInputDialog(null, "Please enter a year:", "[Enter Year]",JOptionPane.QUESTION_MESSAGE);
+			appCalendar.processYear(inputYear);
+		}
+		
 		
 
 	}

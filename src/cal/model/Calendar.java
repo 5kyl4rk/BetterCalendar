@@ -12,6 +12,8 @@ public class Calendar
 	private String monthName;
 	private ArrayList<String> monthList;
 	private boolean validMonth;
+	private boolean validYear;
+	
 
 	public Calendar()
 	{
@@ -19,29 +21,30 @@ public class Calendar
 		year = 0;
 		days = 0;
 		monthName = "WhatMonth?";
-		monthList = new ArrayList<String>(12);
+		monthList = new ArrayList<String>(13);
 		validMonth = false;
-
+		validYear = false;
 		buildMonths();
 	}
 
-	private void buildMonths()
+	private void buildMonths() //index matches actual month
 	{
-		monthList.add(0, "January");
-		monthList.add(1, "February");
-		monthList.add(2, "March");
-		monthList.add(3, "April");
-		monthList.add(4, "May");
-		monthList.add(5, "June");
-		monthList.add(6, "July");
-		monthList.add(7, "August");
-		monthList.add(8, "September");
-		monthList.add(9, "October");
-		monthList.add(10, "November");
-		monthList.add(11, "December");
+		monthList.add(0, "WhatMonth?");
+		monthList.add(1, "January");
+		monthList.add(2, "February");
+		monthList.add(3, "March");
+		monthList.add(4, "April");
+		monthList.add(5, "May");
+		monthList.add(6, "June");
+		monthList.add(7, "July");
+		monthList.add(8, "August");
+		monthList.add(9, "September");
+		monthList.add(10, "October");
+		monthList.add(11, "November");
+		monthList.add(12, "December");
 	}
 
-	public void calculateMonth(String input)
+	public void processMonth(String input)
 	{
 		int monthNumber = 0;
 		boolean isNumber = false;
@@ -53,12 +56,12 @@ public class Calendar
 		else
 		{
 			input = input.trim().toLowerCase();
-			for (int index = 0; index < monthList.size(); index++)
+			for (int index = 1; index < monthList.size(); index++)
 			{
 				String currentMonth = monthList.get(index).toLowerCase();
-				if (input.toLowerCase().equals(currentMonth) || (currentMonth.startsWith(input) && !input.equals("Ma")))
+				if (input.toLowerCase().equals(currentMonth) || (!input.equals("ma") && currentMonth.startsWith(input)))
 				{
-					setMonth(index + 1);
+					setMonth(index);
 					setValidMonth(true);
 				}
 			}
@@ -72,7 +75,7 @@ public class Calendar
 				}
 				catch (NumberFormatException wrong)
 				{
-					JOptionPane.showMessageDialog(null, "Please try again","ERROR",JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Try again!","ERROR",JOptionPane.WARNING_MESSAGE);
 				}
 
 				if (isNumber)
@@ -91,6 +94,41 @@ public class Calendar
 		}
 
 	}
+	
+	public void processYear(String input)
+	{
+		int yearNumber = 0;
+		boolean isNumber = false;
+		
+		if(input == null || input.equals(""))
+		{
+			JOptionPane.showMessageDialog(null,"Please enter something","ERROR",JOptionPane.WARNING_MESSAGE);
+		}
+		else
+		{
+			try
+			{
+				yearNumber = Integer.parseInt(input);
+				isNumber = true;
+			}
+			catch(NumberFormatException nope)
+			{
+				JOptionPane.showMessageDialog(null,"Try Again!","ERROR",JOptionPane.WARNING_MESSAGE);
+			}
+			if(isNumber)
+			{
+				if(yearNumber < 1582)
+				{
+					JOptionPane.showMessageDialog(null,"Year doesn't exist","ERROR",JOptionPane.ERROR_MESSAGE);
+				}
+				else
+				{
+					setYear(yearNumber);
+					setValidYear(true);
+				}
+			}
+		}
+	}
 
 	// --[GET]--
 	public int getMonth()
@@ -107,7 +145,11 @@ public class Calendar
 	{
 		return validMonth;
 	}
-
+	
+	public boolean getValidYear()
+	{
+		return validYear;
+	}
 	// --[SET]--
 	public void setMonth(int month)
 	{
@@ -122,5 +164,10 @@ public class Calendar
 	public void setValidMonth(boolean valid)
 	{
 		this.validMonth = valid;
+	}
+	
+	public void setValidYear(boolean valid)
+	{
+		validYear = valid;
 	}
 }
