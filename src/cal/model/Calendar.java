@@ -174,7 +174,9 @@ public class Calendar
 		int dayStart = 6;
 		String days = "";
 		dayStart += addDaysSinceYear() + addDaysSinceMonth();
-
+		
+		days += makeEmptySpace(dayStart, true);
+		
 		for (int index = 1; index <= daysInMonth(month); index++)
 		{
 			if (index < 10)
@@ -190,8 +192,37 @@ public class Calendar
 				days += "|\n";
 			}
 		}
-
+		
+		days += makeEmptySpace(dayStart + daysInMonth(month), false);
 		return days;
+
+	}
+
+	private String makeEmptySpace(int days, boolean first)
+	{
+		int daySpot = (days % 7);
+		String emptySpace = "|  ";
+		String spaces = "";
+		if (first)
+		{
+			for (int times = 0; times < daySpot; times++)
+			{
+				spaces += emptySpace;
+			}
+			
+		}
+		else
+		{
+			for(int times = 0; times < (7-daySpot); times++)
+			{
+				spaces += emptySpace;
+			}
+			if (daySpot != 0)
+			{
+				spaces += "|";
+			}
+		}
+		return spaces;
 
 	}
 
@@ -260,7 +291,6 @@ public class Calendar
 
 		return numberOfDays;
 	}
-	
 
 	public String toString()
 	{
