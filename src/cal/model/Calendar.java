@@ -21,13 +21,13 @@ public class Calendar
 		month = 0;
 		year = 0;
 		days = 0;
-		monthName = "WhatMonth?";
 		monthList = new ArrayList<String>(13);
 		validMonth = false;
 		validYear = false;
 		months31Days = new int[7];
 		months30Days = new int[4];
 		buildMonths();
+		monthName = monthList.get(month);
 
 	}
 
