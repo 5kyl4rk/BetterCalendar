@@ -30,7 +30,10 @@ public class Calendar
 		monthName = monthList.get(month);
 
 	}
-
+	
+	/**
+	 * adds items to list, 
+	 */
 	private void buildMonths() // index matches actual month
 	{
 		monthList.add(0, "WhatMonth?");
@@ -60,7 +63,11 @@ public class Calendar
 		months30Days[2] = 9;
 		months30Days[3] = 11;
 	}
-
+	/**
+	 * Takes input and process it, checks to see if it's valid, and stores it.
+	 * <br>(Month has to be between 1 & 12)
+	 * @param input the input you need to check to see if it's a valid month
+	 */
 	public void processMonth(String input)
 	{
 		int monthNumber = 0;
@@ -112,6 +119,11 @@ public class Calendar
 
 	}
 
+	/**
+	 * Takes input and process it, checks to see if it's valid, and stores it.
+	 * <br>(Year can't be before 1583)
+	 * @param input the input you need to check to see if it's a valid year
+	 */
 	public void processYear(String input)
 	{
 		int yearNumber = 0;
@@ -146,7 +158,12 @@ public class Calendar
 			}
 		}
 	}
-
+	
+	/**
+	 * Calculate if it's a leap year 
+	 * @param year the year you want to check
+	 * @return true or false stating that it's a leap year
+	 */
 	private boolean isLeapYear(int year)
 	{
 		boolean isLeap = false;

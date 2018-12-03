@@ -15,8 +15,8 @@ public class CalController
 	public void start()
 	{
 		inputData();
-		//JOptionPane.showMessageDialog(null,appCalendar);
-		//System.out.println(appCalendar);
+		JOptionPane.showMessageDialog(null,appCalendar);
+		System.out.println(appCalendar);
 	}
 
 	private void inputData()
