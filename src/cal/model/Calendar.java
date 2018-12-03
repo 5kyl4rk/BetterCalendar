@@ -121,8 +121,9 @@ public class Calendar
 
 	/**
 	 * Takes input and process it, checks to see if it's valid, and stores it.
-	 * <br>(Year can't be before 1583)
+	 * <br><b>(Year can't be before 1583)</b>
 	 * @param input the input you need to check to see if it's a valid year
+	 * 
 	 */
 	public void processYear(String input)
 	{
