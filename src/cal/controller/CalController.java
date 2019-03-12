@@ -7,12 +7,12 @@ import cal.view.CalFrame;
 public class CalController
 {
 	private Calendar appCalendar;
-	private CalFrame appView;
+	private CalFrame appFrame;
 	
 	public CalController()
 	{
 		appCalendar = new Calendar();
-		appView = new CalFrame(this);
+		appFrame = new CalFrame(this);
 	}
 
 	public void start()

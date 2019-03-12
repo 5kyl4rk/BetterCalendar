@@ -1,6 +1,9 @@
 package cal.view;
 
 import cal.controller.CalController;
+
+import java.awt.BorderLayout;
+
 import javax.swing.*;
 
 public class CalPanel extends JPanel
@@ -14,9 +17,10 @@ public class CalPanel extends JPanel
 	
 	public CalPanel(CalController app)
 	{
-		super();
+		super(new BorderLayout());
 		
 		this.app = app;
+		
 		daysLabel = new JLabel[5][7];
 		weekBox = new Box[5];
 		monthLabel = new JLabel("null-vember");
@@ -28,13 +32,14 @@ public class CalPanel extends JPanel
 	
 	private void setupPanel()
 	{
-		this.setLayout(appLayout);
+		//this.setLayout(appLayout);
 		for(int row = 0; row < daysLabel.length; row++)
 		{
-			this.add(weekBox[row]);
+			weekBox[row] = new Box(0);
+			this.add(weekBox[row],BorderLayout.CENTER);
 			for(int col = 0; col < daysLabel[0].length; col++)
 			{
-				daysLabel[row][col].setText("|  ");
+				daysLabel[row][col] = new JLabel("|  ");
 				weekBox[row].add(daysLabel[row][col]);
 			}
 		}
