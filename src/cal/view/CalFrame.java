@@ -6,13 +6,13 @@ import javax.swing.JFrame;
 public class CalFrame extends JFrame
 {
 	private CalController app;
-	private CalPanel appPanel;
+	private CalMasterPanel appPanel;
 	
 	public CalFrame(CalController app)
 	{
 		super();
 		this.app = app;
-		appPanel = new CalPanel(app);
+		appPanel = new CalMasterPanel(app);
 		
 		setupFrame();
 	}
