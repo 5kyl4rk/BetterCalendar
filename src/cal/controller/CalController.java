@@ -2,21 +2,24 @@ package cal.controller;
 
 import javax.swing.JOptionPane;
 import cal.model.Calendar;
+import cal.view.CalFrame;
 
 public class CalController
 {
 	private Calendar appCalendar;
-
+	private CalFrame appView;
+	
 	public CalController()
 	{
 		appCalendar = new Calendar();
+		appView = new CalFrame(this);
 	}
 
 	public void start()
 	{
-		inputData();
-		JOptionPane.showMessageDialog(null,appCalendar);
-		System.out.println(appCalendar);
+		//inputData();
+		//JOptionPane.showMessageDialog(null,appCalendar);
+		//System.out.println(appCalendar);
 	}
 
 	private void inputData()
