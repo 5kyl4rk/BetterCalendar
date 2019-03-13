@@ -26,6 +26,37 @@ public class Calendar
 		validYear = false;
 		months31Days = new int[7];
 		months30Days = new int[4];
+		
+		buildMonths();
+		monthName = monthList.get(month);
+
+	}
+	public Calendar(int month, int year)
+	{
+		if(month < 1 || month > 12)
+		{
+			this.month = 0;
+		}
+		else 
+		{
+			this.month = month;
+		}
+		
+		if(year < 1583)
+		{
+			this.year = 0;
+		}
+		else
+		{
+			this.year = year;
+		}
+		days = 0;
+		monthList = new ArrayList<String>(13);
+		validMonth = false;
+		validYear = false;
+		months31Days = new int[7];
+		months30Days = new int[4];
+		
 		buildMonths();
 		monthName = monthList.get(month);
 
@@ -36,7 +67,7 @@ public class Calendar
 	 */
 	private void buildMonths() // index matches actual month
 	{
-		monthList.add(0, "WhatMonth?");
+		monthList.add(0, "Null-vember");
 		monthList.add(1, "January");
 		monthList.add(2, "February");
 		monthList.add(3, "March");
@@ -215,7 +246,43 @@ public class Calendar
 		return days;
 
 	}
-
+	
+	private String[] makeDaysAsArray()
+	{
+		String[] dayArray;
+		dayArray = new String[35];
+		String emptySpace = "|  ";
+		int currentIndex = 0;
+		int lastIndex = 0;
+		int dayStart = 6;
+		int currentDay = 1;
+		dayStart += addDaysSinceYear() + addDaysSinceMonth();
+		
+		for(int times = 0; times < (dayStart % 7); times++ )
+		{
+			dayArray[currentIndex] = emptySpace;
+			currentIndex++;
+		}
+		
+		for (int index = 0; index < daysInMonth(month); index++)
+		{
+			
+			dayArray[currentIndex] = currentDay+"";
+			currentIndex++;
+			currentDay++;
+		}
+		
+		lastIndex = currentIndex;
+		
+		for(int times = 0; times < (dayArray.length - lastIndex); times++ )
+		{
+			
+			dayArray[currentIndex] = emptySpace;
+			currentIndex++;
+		}
+		
+		return dayArray;
+	}
 	private String makeEmptySpace(int days, boolean first)
 	{
 		int daySpot = (days % 7);
@@ -310,6 +377,22 @@ public class Calendar
 		return numberOfDays;
 	}
 
+	public String printDayArray()
+	{
+		String[] dayArray = makeDaysAsArray();
+		String display = getMonthName()+"\n";
+		
+		for (int index = 0; index < dayArray.length; index++)
+		{
+			display += dayArray[index]+ " ";
+			if ((index+1) % 7 == 0)
+			{
+				display += "|\n";
+			}
+		}
+		
+		return display;
+	}
 	public String toString()
 	{
 		return printDays();
@@ -319,6 +402,11 @@ public class Calendar
 	public int getMonth()
 	{
 		return month;
+	}
+	
+	public String getMonthName()
+	{
+		return monthList.get(month);
 	}
 
 	public int getYear()
@@ -334,6 +422,11 @@ public class Calendar
 	public boolean getValidYear()
 	{
 		return validYear;
+	}
+	
+	public String[] getDayArray()
+	{
+		return makeDaysAsArray();
 	}
 
 	// --[SET]--
