@@ -21,6 +21,7 @@ public class CalMasterPanel extends JPanel
 		
 		this.app = app;
 		
+		appLayout = new SpringLayout();
 		
 		days = new DisplayDays(app);
 		monthLabel = new JLabel("null-vember");
@@ -33,10 +34,11 @@ public class CalMasterPanel extends JPanel
 	private void setupPanel()
 	{
 		this.setLayout(appLayout);
-		
-		this.add(days);
-		this.add(input);
 		this.add(monthLabel);
+		this.add(input);
+		this.add(days);
+		
+		
 	}
 	
 	private void setupListeners()

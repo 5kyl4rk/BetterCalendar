@@ -12,15 +12,15 @@ public class CalController
 	public CalController()
 	{
 		appCalendar = new Calendar(2, 2001);
-		//appFrame = new CalFrame(this);
+		appFrame = new CalFrame(this);
 	}
 
 	public void start()
 	{
-		System.out.println(appCalendar.printDayArray());
+		//System.out.println(appCalendar.printDayArray());
 		//inputData();
 		//JOptionPane.showMessageDialog(null,appCalendar);
-		System.out.println(appCalendar);
+		//System.out.println(appCalendar);
 	}
 
 	private void inputData()
