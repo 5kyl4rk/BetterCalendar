@@ -41,8 +41,12 @@ public class CalController
 			appCalendar.processYear(inputYear);
 		}
 		
-		
-
 	}
+	
+	public void errorManger()
+	{
+		
+	}
+	
 
 }

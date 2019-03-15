@@ -24,7 +24,13 @@ public class CalMasterPanel extends JPanel
 		appLayout = new SpringLayout();
 		
 		days = new DisplayDays(app);
+		appLayout.putConstraint(SpringLayout.NORTH, days, 81, SpringLayout.NORTH, this);
+		appLayout.putConstraint(SpringLayout.WEST, days, 118, SpringLayout.WEST, this);
+		appLayout.putConstraint(SpringLayout.SOUTH, days, -63, SpringLayout.SOUTH, this);
+		appLayout.putConstraint(SpringLayout.EAST, days, 296, SpringLayout.WEST, this);
 		monthLabel = new JLabel("null-vember");
+		appLayout.putConstraint(SpringLayout.WEST, monthLabel, 167, SpringLayout.WEST, this);
+		appLayout.putConstraint(SpringLayout.SOUTH, monthLabel, -17, SpringLayout.NORTH, days);
 		input = new JTextField();
 		setupPanel();
 		setupListeners();
