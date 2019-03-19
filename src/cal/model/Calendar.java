@@ -1,8 +1,8 @@
 package cal.model;
 
 import java.util.ArrayList;
-
 import javax.swing.JOptionPane;
+import cal.controller.CalController;
 
 public class Calendar
 {
@@ -15,8 +15,9 @@ public class Calendar
 	private boolean validYear;
 	private int[] months31Days;
 	private int[] months30Days;
+	private CalendarErrors appError;
 
-	public Calendar()
+	public Calendar(CalController appController)
 	{
 		month = 0;
 		year = 0;
@@ -26,12 +27,13 @@ public class Calendar
 		validYear = false;
 		months31Days = new int[7];
 		months30Days = new int[4];
+		appError = new CalendarErrors();
 		
 		buildMonths();
 		monthName = monthList.get(month);
 
 	}
-	public Calendar(int month, int year)
+	public Calendar(int month, int year, CalController appController)
 	{
 		if(month < 1 || month > 12)
 		{
@@ -106,7 +108,7 @@ public class Calendar
 
 		if (input == null || input.equals(""))
 		{
-			JOptionPane.showMessageDialog(null, "Please enter something", "ERROR", JOptionPane.WARNING_MESSAGE);
+			appController.errorManger(appError.getEmptyInput());
 		}
 		else
 		{

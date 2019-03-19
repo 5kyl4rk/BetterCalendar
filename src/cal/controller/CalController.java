@@ -11,7 +11,7 @@ public class CalController
 	
 	public CalController()
 	{
-		appCalendar = new Calendar(2, 2001);
+		appCalendar = new Calendar(2, 2001, this);
 		appFrame = new CalFrame(this);
 	}
 
@@ -43,9 +43,9 @@ public class CalController
 		
 	}
 	
-	public void errorManger()
+	public void errorManger(Exception problem)
 	{
-		
+		JOptionPane.showMessageDialog(appFrame, problem.getMessage(), "[ERROR]: "+problem.getCause(),JOptionPane.ERROR_MESSAGE);
 	}
 	
 
