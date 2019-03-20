@@ -21,7 +21,7 @@ public class CalFrame extends JFrame
 	{	
 		this.setContentPane(appPanel);
 		this.setSize(500, 500);
-		this.setVisible(false);
+		this.setVisible(true);
 		this.setResizable(true);
 		this.setTitle("Calendar");
 	}

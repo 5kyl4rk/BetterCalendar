@@ -8,7 +8,7 @@ import javax.swing.*;
 
 public class DisplayDays extends JPanel
 {
-	private Box[] weekBox;
+	
 	private JLabel[] daysLabel;
 	private CalController app;
 	private GridLayout appLayout;
@@ -19,12 +19,11 @@ public class DisplayDays extends JPanel
 		
 		this.app = app;
 		appLayout = new GridLayout(5,7);
-		weekBox = new Box[5];
 		daysLabel = new JLabel[35];
 		
 		for(int index = 0; index < daysLabel.length; index++)
 		{
-			daysLabel[index] = new JLabel("yo");
+			daysLabel[index] = new JLabel("|  ");
 		}
 		
 		setupPanel();
