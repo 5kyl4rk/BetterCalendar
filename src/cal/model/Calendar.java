@@ -16,6 +16,7 @@ public class Calendar
 	private int[] months31Days;
 	private int[] months30Days;
 	private CalendarErrors appError;
+	private CalController app;
 
 	public Calendar(CalController appController)
 	{
@@ -28,6 +29,7 @@ public class Calendar
 		months31Days = new int[7];
 		months30Days = new int[4];
 		appError = new CalendarErrors();
+		app = appController;
 		
 		buildMonths();
 		monthName = monthList.get(month);
@@ -58,7 +60,8 @@ public class Calendar
 		validYear = false;
 		months31Days = new int[7];
 		months30Days = new int[4];
-		
+		appError = new CalendarErrors();
+		app = appController;
 		buildMonths();
 		monthName = monthList.get(month);
 
@@ -108,7 +111,7 @@ public class Calendar
 
 		if (input == null || input.equals(""))
 		{
-			appController.errorManger(appError.getEmptyInput());
+			app.errorManager(appError.getEmptyInput());
 		}
 		else
 		{
@@ -132,14 +135,14 @@ public class Calendar
 				}
 				catch (NumberFormatException wrong)
 				{
-					JOptionPane.showMessageDialog(null, "Try again!", "ERROR", JOptionPane.WARNING_MESSAGE);
+					app.errorManager(appError.getNotAnInt());
 				}
 
 				if (isNumber)
 				{
 					if (monthNumber <= 0 || monthNumber > 12)
 					{
-						JOptionPane.showMessageDialog(null, "Month doesn't exist", "ERROR", JOptionPane.ERROR_MESSAGE);
+						app.errorManager(appError.getInvalidMonth());;
 					}
 					else
 					{
@@ -165,7 +168,7 @@ public class Calendar
 
 		if (input == null || input.equals(""))
 		{
-			JOptionPane.showMessageDialog(null, "Please enter something", "ERROR", JOptionPane.WARNING_MESSAGE);
+			app.errorManager(appError.getEmptyInput());
 		}
 		else
 		{
@@ -176,13 +179,13 @@ public class Calendar
 			}
 			catch (NumberFormatException nope)
 			{
-				JOptionPane.showMessageDialog(null, "Try Again!", "ERROR", JOptionPane.WARNING_MESSAGE);
+				app.errorManager(appError.getNotAnInt());
 			}
 			if (isNumber)
 			{
 				if (yearNumber < 1583)
 				{
-					JOptionPane.showMessageDialog(null, "Year doesn't exist", "ERROR", JOptionPane.ERROR_MESSAGE);
+					app.errorManager(appError.getInvalidYear());
 				}
 				else
 				{

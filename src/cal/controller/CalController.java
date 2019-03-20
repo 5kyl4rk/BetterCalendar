@@ -18,9 +18,9 @@ public class CalController
 	public void start()
 	{
 		//System.out.println(appCalendar.printDayArray());
-		//inputData();
+		inputData();
 		//JOptionPane.showMessageDialog(null,appCalendar);
-		//System.out.println(appCalendar);
+		System.out.println(appCalendar);
 	}
 
 	private void inputData()
@@ -43,9 +43,9 @@ public class CalController
 		
 	}
 	
-	public void errorManger(Exception problem)
+	public void errorManager(Exception problem)
 	{
-		JOptionPane.showMessageDialog(appFrame, problem.getMessage(), "[ERROR]: "+problem.getCause(),JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(appFrame, problem.getMessage(), "[ERROR]: "+problem.getCause().getMessage(),JOptionPane.ERROR_MESSAGE);
 	}
 	
 
