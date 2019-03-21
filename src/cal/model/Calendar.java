@@ -68,7 +68,7 @@ public class Calendar
 	}
 	
 	/**
-	 * adds items to list, 
+	 * adds items to list, the indexes in 'monthList' matches the actual number of the month, meaning '0' should not be reachable 
 	 */
 	private void buildMonths() // index matches actual month
 	{
@@ -101,7 +101,7 @@ public class Calendar
 	}
 	/**
 	 * Takes input and process it, checks to see if it's valid, and stores it.
-	 * <br>(Month has to be between 1 & 12)
+	 * <br><b>(Month has to be between 1 & 12)</b>
 	 * @param input the input you need to check to see if it's a valid month
 	 */
 	public void processMonth(String input)
@@ -222,7 +222,10 @@ public class Calendar
 
 		return isLeap;
 	}
-
+	/**
+	 * Takes the information and converts it into a readable String
+	 * @return a single String that displays correctly
+	 */
 	private String printDays()
 	{
 		int dayStart = 6;
@@ -251,7 +254,12 @@ public class Calendar
 		return days;
 
 	}
-	
+	/**
+	 * <h2><i>Deprecated</i></h2>Converts data into an array of days <br> <b>NOTE:</b> the max value in the array is 35,
+	 *  when really it should be 42, meaning that there's a chance of getting an 'IndexOutOfBounds' error'. 
+	 *  The thing is, this case is rare and would mean that a majority of the time there would be a useless empty row.
+	 * @return an array with days and empty spaces in their appropriate spot
+	 */
 	private String[] makeDaysAsArray()
 	{
 		String[] dayArray;
@@ -288,6 +296,10 @@ public class Calendar
 		return dayArray;
 	}
 	
+	/** 
+	 * converts calendar as an ArrayList, making it more dynamic
+	 * @return an ArrayList with days and empty spaces in the appropriate spot
+	 */
 	private ArrayList<String> makeDaysAsList()
 	{
 		ArrayList<String> dayList = new ArrayList<String>();
@@ -317,6 +329,12 @@ public class Calendar
 		return dayList;
 	}
 	
+	/**
+	 * A helper method used in the {@link #printDays()} method.  Calculates how many empty spaces to fill in order to have the calendar line up
+	 * @param days the number of days that have past before/after the current/last day
+	 * @param first if true, it will calculate the space before, else it will calculate the space at the end
+	 * @return a String of emptySpaces that lines up for printDays()
+	 */
 	private String makeEmptySpace(int days, boolean first)
 	{
 		int daySpot = (days % 7);
@@ -344,7 +362,10 @@ public class Calendar
 		return spaces;
 
 	}
-
+	/**
+	 * adds up all the days before the store year
+	 * @return the number of days since that year
+	 */
 	private int addDaysSinceYear()
 	{
 		int daysSince = 0;
@@ -362,7 +383,11 @@ public class Calendar
 
 		return daysSince;
 	}
-
+	
+	/**
+	 * adds up how many days have past before the current month in the given year
+	 * @return the number of days since that year
+	 */
 	private int addDaysSinceMonth()
 	{
 		int daysSince = 0;
@@ -374,7 +399,12 @@ public class Calendar
 
 		return daysSince;
 	}
-
+	
+	/**
+	 * retrieves how many days are in that month
+	 * @param month the month you want to select
+	 * @return the number of days in that month
+	 */
 	private int daysInMonth(int month)
 	{
 		int numberOfDays = 0;
@@ -410,7 +440,11 @@ public class Calendar
 
 		return numberOfDays;
 	}
-
+	
+	/**
+	 * calls {@link #makeDaysAsArray()} and prints the String stored in each spot. Prints very similar to {@link #printDays()}
+	 * @return a formatted String calendar
+	 */
 	public String printDayArray()
 	{
 		String[] dayArray = makeDaysAsArray();
@@ -427,6 +461,10 @@ public class Calendar
 		
 		return display;
 	}
+	
+	/**
+	 * calls {@link #printDays()}
+	 */
 	public String toString()
 	{
 		return printDays();
