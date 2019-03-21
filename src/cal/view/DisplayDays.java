@@ -38,4 +38,12 @@ public class DisplayDays extends JPanel
 		}
 		
 	}
+	
+	public void updateDays(String[] days)
+	{
+		for(int index = 0; index < days.length; index++)
+		{
+			daysLabel[index].setText(days[index]);
+		}
+	}
 }

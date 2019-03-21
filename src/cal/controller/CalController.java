@@ -53,6 +53,17 @@ public class CalController
 	{
 		return appCalendar.getDayArray();
 	}
+	
+	public String getMonth()
+	{
+		return appCalendar.getMonthName();
+	}
+	
+	public String getYear()
+	{
+		return appCalendar.getYear() + "";
+	}
+	
 	public void errorManager(Exception problem)
 	{
 		JOptionPane.showMessageDialog(appFrame, problem.getMessage(), "[ERROR]: "+problem.getCause().getMessage(),JOptionPane.ERROR_MESSAGE);

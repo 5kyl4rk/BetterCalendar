@@ -1,12 +1,10 @@
 package cal.view;
 
 import cal.controller.CalController;
-
-import java.awt.BorderLayout;
-
 import javax.swing.*;
 import java.awt.Font;
-import java.awt.GridLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class CalMasterPanel extends JPanel
 {
@@ -66,7 +64,26 @@ public class CalMasterPanel extends JPanel
 	
 	private void setupListeners()
 	{
-		
+		changeValues.addActionListener(new ActionListener()
+				{
+					public void actionPerformed(ActionEvent click)
+					{
+						String yearData = yearInput.getText();
+						String monthData = monthInput.getText();
+						app.sendCalendarData(monthData, yearData);
+						yearInput.setText("");
+						monthInput.setText("");
+						updateDisplayInfo();
+					}
+				});
+	}
+	
+	private void updateDisplayInfo()
+	{
+		String[] updatedDays = app.getCalendarDays();
+		monthLabel.setText(app.getMonth());
+		yearLabel.setText(app.getYear());
+		days.updateDays(updatedDays);
 	}
 	
 	private void setupLayout()
