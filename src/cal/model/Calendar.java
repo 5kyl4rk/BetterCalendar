@@ -260,7 +260,6 @@ public class Calendar
 		int currentIndex = 0;
 		int lastIndex = 0;
 		int dayStart = 6;
-		int currentDay = 1;
 		dayStart += addDaysSinceYear() + addDaysSinceMonth();
 		
 		for(int times = 0; times < (dayStart % 7); times++ )
@@ -269,12 +268,12 @@ public class Calendar
 			currentIndex++;
 		}
 		
-		for (int index = 0; index < daysInMonth(month); index++)
+		for (int day = 1; day < daysInMonth(month) + 1; day++)
 		{
 			
-			dayArray[currentIndex] = currentDay+"";
+			dayArray[currentIndex] = day+"";
 			currentIndex++;
-			currentDay++;
+			
 		}
 		
 		lastIndex = currentIndex;
@@ -288,6 +287,36 @@ public class Calendar
 		
 		return dayArray;
 	}
+	
+	private ArrayList<String> makeDaysAsList()
+	{
+		ArrayList<String> dayList = new ArrayList<String>();
+		String empty = "|  ";
+		int dayStart = 6;
+		dayStart += addDaysSinceYear() + addDaysSinceMonth();
+		int spaceLeft = (dayStart + daysInMonth(month)) % 7;
+		
+		for(int times = 0; times < (dayStart % 7); times++ )
+		{
+			dayList.add(empty);
+		}
+		
+		for (int day = 1; day < daysInMonth(month) + 1; day++)
+		{
+			
+			dayList.add(day+"");
+			
+		}
+		
+		
+		for(int times = 0; times < (7 - spaceLeft); times++ )
+		{
+			dayList.add(empty);
+		}
+		
+		return dayList;
+	}
+	
 	private String makeEmptySpace(int days, boolean first)
 	{
 		int daySpot = (days % 7);
