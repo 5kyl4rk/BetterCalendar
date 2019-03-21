@@ -43,6 +43,16 @@ public class CalController
 		
 	}
 	
+	public void sendCalendarData(String month, String year)
+	{
+		appCalendar.processMonth(month);
+		appCalendar.processYear(year);
+	}
+	
+	public String[] getCalendarDays()
+	{
+		return appCalendar.getDayArray();
+	}
 	public void errorManager(Exception problem)
 	{
 		JOptionPane.showMessageDialog(appFrame, problem.getMessage(), "[ERROR]: "+problem.getCause().getMessage(),JOptionPane.ERROR_MESSAGE);
