@@ -343,9 +343,11 @@ public class Calendar
 			dayList.add(currentDay);
 		}
 		
-		int spaceLeft = (dayStart + daysInMonth(month)) % 7;
+		int spaceLeft = (dayStart + daysInMonth(month)) % 8;
+	
 		for(int times = 0; times < (7 - spaceLeft); times++ )
 		{
+			
 			/*
 			if(currentIndex%7 == 6)
 			{

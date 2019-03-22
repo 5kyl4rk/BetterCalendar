@@ -13,7 +13,7 @@ public class CalController
 	
 	public CalController()
 	{
-		appCalendar = new Calendar(2, 2001, this);
+		appCalendar = new Calendar(this);
 		appFrame = new CalFrame(this);
 	}
 
