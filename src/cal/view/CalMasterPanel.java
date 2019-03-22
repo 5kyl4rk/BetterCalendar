@@ -4,6 +4,7 @@ import cal.controller.CalController;
 import javax.swing.*;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 public class CalMasterPanel extends JPanel
@@ -30,10 +31,10 @@ public class CalMasterPanel extends JPanel
 		
 		days = new DisplayDays(app);
 		
-		monthLabel = new JLabel("null-vember");
+		monthLabel = new JLabel(app.getMonth());
 		
 		monthInput = new JTextField();
-		yearLabel = new JLabel("-9999");
+		yearLabel = new JLabel(app.getYear());
 		
 		changeValues = new JButton("Change date");
 		inputInfoYear = new JLabel("Year:");
@@ -80,7 +81,7 @@ public class CalMasterPanel extends JPanel
 	
 	private void updateDisplayInfo()
 	{
-		String[] updatedDays = app.getCalendarDays();
+		ArrayList<String> updatedDays = app.getCalendarDays();
 		monthLabel.setText(app.getMonth());
 		yearLabel.setText(app.getYear());
 		days.updateDays(updatedDays);

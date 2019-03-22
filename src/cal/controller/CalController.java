@@ -1,5 +1,7 @@
 package cal.controller;
 
+import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
 import cal.model.Calendar;
 import cal.view.CalFrame;
@@ -22,7 +24,7 @@ public class CalController
 		//JOptionPane.showMessageDialog(null,appCalendar);
 		//System.out.println(appCalendar);
 	}
-
+	
 	private void inputData()
 	{
 		String inputMonth;
@@ -49,9 +51,9 @@ public class CalController
 		appCalendar.processYear(year);
 	}
 	
-	public String[] getCalendarDays()
+	public ArrayList<String> getCalendarDays()
 	{
-		return appCalendar.getDayArray();
+		return appCalendar.getDayList();
 	}
 	
 	public String getMonth()

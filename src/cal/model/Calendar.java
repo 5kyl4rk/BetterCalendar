@@ -21,7 +21,7 @@ public class Calendar
 	public Calendar(CalController appController)
 	{
 		month = 0;
-		year = 0;
+		year = -9999;
 		days = 0;
 		monthList = new ArrayList<String>(13);
 		validMonth = false;
@@ -305,25 +305,60 @@ public class Calendar
 		ArrayList<String> dayList = new ArrayList<String>();
 		String empty = "|  ";
 		int dayStart = 6;
+		int currentIndex = 0;
 		dayStart += addDaysSinceYear() + addDaysSinceMonth();
-		int spaceLeft = (dayStart + daysInMonth(month)) % 7;
+		
 		
 		for(int times = 0; times < (dayStart % 7); times++ )
 		{
+			/*
 			dayList.add(empty);
+			*/
+			currentIndex++;
+			
+			dayList.add("  ");
 		}
 		
 		for (int day = 1; day < daysInMonth(month) + 1; day++)
 		{
+			String currentDay = day +"";
+			/*
+			if(day < 10)
+			{
+				currentDay += " ";
+			}
 			
-			dayList.add(day+"");
+			if(currentIndex%7 == 6)
+			{
+				dayList.add("|" + currentDay+"|");
+			}
+			else
+			{
+				dayList.add("|" + currentDay);
+			}
+			*/
+			currentIndex++;
 			
+			
+			dayList.add(currentDay);
 		}
 		
-		
+		int spaceLeft = (dayStart + daysInMonth(month)) % 7;
 		for(int times = 0; times < (7 - spaceLeft); times++ )
 		{
-			dayList.add(empty);
+			/*
+			if(currentIndex%7 == 6)
+			{
+				dayList.add( empty+"|");
+			}
+			else
+			{
+				dayList.add(empty);
+			}
+			*/
+			
+			 
+			dayList.add("  ");
 		}
 		
 		return dayList;
@@ -499,6 +534,11 @@ public class Calendar
 	public String[] getDayArray()
 	{
 		return makeDaysAsArray();
+	}
+	
+	public ArrayList<String> getDayList()
+	{
+		return makeDaysAsList();
 	}
 
 	// --[SET]--
