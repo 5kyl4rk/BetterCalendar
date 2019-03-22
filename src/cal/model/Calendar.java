@@ -30,23 +30,24 @@ public class Calendar
 		months30Days = new int[4];
 		appError = new CalendarErrors();
 		app = appController;
-		
+
 		buildMonths();
 		monthName = monthList.get(month);
 
 	}
+
 	public Calendar(int month, int year, CalController appController)
 	{
-		if(month < 1 || month > 12)
+		if (month < 1 || month > 12)
 		{
 			this.month = 0;
 		}
-		else 
+		else
 		{
 			this.month = month;
 		}
-		
-		if(year < 1583)
+
+		if (year < 1583)
 		{
 			this.year = 0;
 		}
@@ -66,9 +67,10 @@ public class Calendar
 		monthName = monthList.get(month);
 
 	}
-	
+
 	/**
-	 * adds items to list, the indexes in 'monthList' matches the actual number of the month, meaning '0' should not be reachable 
+	 * adds items to list, the indexes in 'monthList' matches the actual number of
+	 * the month, meaning '0' should not be reachable
 	 */
 	private void buildMonths() // index matches actual month
 	{
@@ -99,10 +101,13 @@ public class Calendar
 		months30Days[2] = 9;
 		months30Days[3] = 11;
 	}
+
 	/**
-	 * Takes input and process it, checks to see if it's valid, and stores it.
-	 * <br><b>(Month has to be between 1 & 12)</b>
-	 * @param input the input you need to check to see if it's a valid month
+	 * Takes input and process it, checks to see if it's valid, and stores it. <br>
+	 * <b>(Month has to be between 1 & 12)</b>
+	 * 
+	 * @param input
+	 *            the input you need to check to see if it's a valid month
 	 */
 	public void processMonth(String input)
 	{
@@ -142,7 +147,8 @@ public class Calendar
 				{
 					if (monthNumber <= 0 || monthNumber > 12)
 					{
-						app.errorManager(appError.getInvalidMonth());;
+						app.errorManager(appError.getInvalidMonth());
+						;
 					}
 					else
 					{
@@ -156,9 +162,11 @@ public class Calendar
 	}
 
 	/**
-	 * Takes input and process it, checks to see if it's valid, and stores it.
-	 * <br><b>(Year can't be before 1583)</b>
-	 * @param input the input you need to check to see if it's a valid year
+	 * Takes input and process it, checks to see if it's valid, and stores it. <br>
+	 * <b>(Year can't be before 1583)</b>
+	 * 
+	 * @param input
+	 *            the input you need to check to see if it's a valid year
 	 * 
 	 */
 	public void processYear(String input)
@@ -195,10 +203,12 @@ public class Calendar
 			}
 		}
 	}
-	
+
 	/**
-	 * Calculate if it's a leap year 
-	 * @param year the year you want to check
+	 * Calculate if it's a leap year
+	 * 
+	 * @param year
+	 *            the year you want to check
 	 * @return true or false stating that it's a leap year
 	 */
 	private boolean isLeapYear(int year)
@@ -222,8 +232,10 @@ public class Calendar
 
 		return isLeap;
 	}
+
 	/**
 	 * Takes the information and converts it into a readable String
+	 * 
 	 * @return a single String that displays correctly
 	 */
 	private String printDays()
@@ -231,9 +243,9 @@ public class Calendar
 		int dayStart = 6;
 		String days = "";
 		dayStart += addDaysSinceYear() + addDaysSinceMonth();
-		
+
 		days += makeEmptySpace(dayStart, true);
-		
+
 		for (int index = 1; index <= daysInMonth(month); index++)
 		{
 			if (index < 10)
@@ -249,15 +261,19 @@ public class Calendar
 				days += "|\n";
 			}
 		}
-		
+
 		days += makeEmptySpace(dayStart + daysInMonth(month), false);
 		return days;
 
 	}
+
 	/**
-	 * <h2><i>Deprecated</i></h2>Converts data into an array of days <br> <b>NOTE:</b> the max value in the array is 35,
-	 *  when really it should be 42, meaning that there's a chance of getting an 'IndexOutOfBounds' error'. 
-	 *  The thing is, this case is rare and would mean that a majority of the time there would be a useless empty row.
+	 * <h2><i>Deprecated</i></h2>Converts data into an array of days <br>
+	 * <b>NOTE:</b> the max value in the array is 35, when really it should be 42,
+	 * meaning that there's a chance of getting an 'IndexOutOfBounds' error'. The
+	 * thing is, this case is rare and would mean that a majority of the time there
+	 * would be a useless empty row.
+	 * 
 	 * @return an array with days and empty spaces in their appropriate spot
 	 */
 	private String[] makeDaysAsArray()
@@ -269,35 +285,36 @@ public class Calendar
 		int lastIndex = 0;
 		int dayStart = 6;
 		dayStart += addDaysSinceYear() + addDaysSinceMonth();
-		
-		for(int times = 0; times < (dayStart % 7); times++ )
+
+		for (int times = 0; times < (dayStart % 7); times++)
 		{
 			dayArray[currentIndex] = emptySpace;
 			currentIndex++;
 		}
-		
+
 		for (int day = 1; day < daysInMonth(month) + 1; day++)
 		{
-			
-			dayArray[currentIndex] = day+"";
+
+			dayArray[currentIndex] = day + "";
 			currentIndex++;
-			
+
 		}
-		
+
 		lastIndex = currentIndex;
-		
-		for(int times = 0; times < (dayArray.length - lastIndex); times++ )
+
+		for (int times = 0; times < (dayArray.length - lastIndex); times++)
 		{
-			
+
 			dayArray[currentIndex] = emptySpace;
 			currentIndex++;
 		}
-		
+
 		return dayArray;
 	}
-	
-	/** 
+
+	/**
 	 * converts calendar as an ArrayList, making it more dynamic
+	 * 
 	 * @return an ArrayList with days and empty spaces in the appropriate spot
 	 */
 	private ArrayList<String> makeDaysAsList()
@@ -307,69 +324,58 @@ public class Calendar
 		int dayStart = 6;
 		int currentIndex = 0;
 		dayStart += addDaysSinceYear() + addDaysSinceMonth();
-		
-		
-		for(int times = 0; times < (dayStart % 7); times++ )
+
+		for (int times = 0; times < (dayStart % 7); times++)
 		{
 			/*
-			dayList.add(empty);
-			*/
+			 * dayList.add(empty);
+			 */
 			currentIndex++;
-			
+
 			dayList.add("  ");
 		}
-		
+
 		for (int day = 1; day < daysInMonth(month) + 1; day++)
 		{
-			String currentDay = day +"";
+			String currentDay = day + "";
 			/*
-			if(day < 10)
-			{
-				currentDay += " ";
-			}
-			
-			if(currentIndex%7 == 6)
-			{
-				dayList.add("|" + currentDay+"|");
-			}
-			else
-			{
-				dayList.add("|" + currentDay);
-			}
-			*/
+			 * if(day < 10) { currentDay += " "; }
+			 * 
+			 * if(currentIndex%7 == 6) { dayList.add("|" + currentDay+"|"); } else {
+			 * dayList.add("|" + currentDay); }
+			 */
 			currentIndex++;
-			
-			
+
 			dayList.add(currentDay);
 		}
-		
-		int spaceLeft = (dayStart + daysInMonth(month)) % 8;
-	
-		for(int times = 0; times < (7 - spaceLeft); times++ )
+
+		int spaceLeft = (dayStart + daysInMonth(month)) % 7;
+		if (spaceLeft > 0)
 		{
-			
-			/*
-			if(currentIndex%7 == 6)
+			for (int times = 0; times < (7 - spaceLeft); times++)
 			{
-				dayList.add( empty+"|");
+
+				/*
+				 * if(currentIndex%7 == 6) { dayList.add( empty+"|"); } else {
+				 * dayList.add(empty); }
+				 */
+
+				dayList.add("  ");
 			}
-			else
-			{
-				dayList.add(empty);
-			}
-			*/
-			
-			 
-			dayList.add("  ");
 		}
-		
 		return dayList;
 	}
-	
+
 	/**
-	 * A helper method used in the {@link #printDays()} method.  Calculates how many empty spaces to fill in order to have the calendar line up
-	 * @param days the number of days that have past before/after the current/last day
-	 * @param first if true, it will calculate the space before, else it will calculate the space at the end
+	 * A helper method used in the {@link #printDays()} method. Calculates how many
+	 * empty spaces to fill in order to have the calendar line up
+	 * 
+	 * @param days
+	 *            the number of days that have past before/after the current/last
+	 *            day
+	 * @param first
+	 *            if true, it will calculate the space before, else it will
+	 *            calculate the space at the end
 	 * @return a String of emptySpaces that lines up for printDays()
 	 */
 	private String makeEmptySpace(int days, boolean first)
@@ -383,11 +389,11 @@ public class Calendar
 			{
 				spaces += emptySpace;
 			}
-			
+
 		}
 		else
 		{
-			for(int times = 0; times < (7-daySpot); times++)
+			for (int times = 0; times < (7 - daySpot); times++)
 			{
 				spaces += emptySpace;
 			}
@@ -399,8 +405,10 @@ public class Calendar
 		return spaces;
 
 	}
+
 	/**
 	 * adds up all the days before the store year
+	 * 
 	 * @return the number of days since that year
 	 */
 	private int addDaysSinceYear()
@@ -420,9 +428,10 @@ public class Calendar
 
 		return daysSince;
 	}
-	
+
 	/**
 	 * adds up how many days have past before the current month in the given year
+	 * 
 	 * @return the number of days since that year
 	 */
 	private int addDaysSinceMonth()
@@ -436,10 +445,12 @@ public class Calendar
 
 		return daysSince;
 	}
-	
+
 	/**
 	 * retrieves how many days are in that month
-	 * @param month the month you want to select
+	 * 
+	 * @param month
+	 *            the month you want to select
 	 * @return the number of days in that month
 	 */
 	private int daysInMonth(int month)
@@ -477,28 +488,30 @@ public class Calendar
 
 		return numberOfDays;
 	}
-	
+
 	/**
-	 * calls {@link #makeDaysAsArray()} and prints the String stored in each spot. Prints very similar to {@link #printDays()}
+	 * calls {@link #makeDaysAsArray()} and prints the String stored in each spot.
+	 * Prints very similar to {@link #printDays()}
+	 * 
 	 * @return a formatted String calendar
 	 */
 	public String printDayArray()
 	{
 		String[] dayArray = makeDaysAsArray();
-		String display = getMonthName()+"\n";
-		
+		String display = getMonthName() + "\n";
+
 		for (int index = 0; index < dayArray.length; index++)
 		{
-			display += dayArray[index]+ " ";
-			if ((index+1) % 7 == 0)
+			display += dayArray[index] + " ";
+			if ((index + 1) % 7 == 0)
 			{
 				display += "|\n";
 			}
 		}
-		
+
 		return display;
 	}
-	
+
 	/**
 	 * calls {@link #printDays()}
 	 */
@@ -512,7 +525,7 @@ public class Calendar
 	{
 		return month;
 	}
-	
+
 	public String getMonthName()
 	{
 		return monthList.get(month);
@@ -532,12 +545,12 @@ public class Calendar
 	{
 		return validYear;
 	}
-	
+
 	public String[] getDayArray()
 	{
 		return makeDaysAsArray();
 	}
-	
+
 	public ArrayList<String> getDayList()
 	{
 		return makeDaysAsList();
