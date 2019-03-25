@@ -20,7 +20,7 @@ public class CalMasterPanel extends JPanel
 	private JLabel inputInfoYear;
 	private JLabel inputInfoMonth;
 	private SpringLayout appLayout;
-	private Box daysInWeek;
+	private DaysInWeek weekDays;
 
 	public CalMasterPanel(CalController app)
 	{
@@ -31,13 +31,23 @@ public class CalMasterPanel extends JPanel
 		appLayout = new SpringLayout();
 
 		days = new DisplayDays(app);
-
+		appLayout.putConstraint(SpringLayout.NORTH, days, 75, SpringLayout.NORTH, this);
+		appLayout.putConstraint(SpringLayout.WEST, days, 40, SpringLayout.WEST, this);
+		weekDays = new DaysInWeek();
+		appLayout.putConstraint(SpringLayout.WEST, weekDays, 0, SpringLayout.WEST, days);
+		appLayout.putConstraint(SpringLayout.SOUTH, weekDays, -6, SpringLayout.NORTH, days);
+		appLayout.putConstraint(SpringLayout.EAST, weekDays, 0, SpringLayout.EAST, days);
 		monthLabel = new JLabel(app.getMonth());
+		appLayout.putConstraint(SpringLayout.WEST, monthLabel, 0, SpringLayout.WEST, days);
+		appLayout.putConstraint(SpringLayout.SOUTH, monthLabel, -7, SpringLayout.NORTH, weekDays);
 
 		monthInput = new JTextField();
 		yearLabel = new JLabel(app.getYear());
+		appLayout.putConstraint(SpringLayout.NORTH, yearLabel, 0, SpringLayout.NORTH, monthLabel);
+		appLayout.putConstraint(SpringLayout.EAST, yearLabel, 0, SpringLayout.EAST, days);
 
 		changeValues = new JButton("Change date");
+		appLayout.putConstraint(SpringLayout.WEST, changeValues, 75, SpringLayout.EAST, monthInput);
 		inputInfoYear = new JLabel("Year:");
 		inputInfoMonth = new JLabel("Month:");
 		yearInput = new JTextField();
@@ -62,6 +72,7 @@ public class CalMasterPanel extends JPanel
 		this.add(inputInfoMonth);
 		this.add(changeValues);
 		this.add(days);
+		this.add(weekDays);
 
 
 	}
@@ -92,8 +103,6 @@ public class CalMasterPanel extends JPanel
 
 	private void setupLayout()
 	{
-		appLayout.putConstraint(SpringLayout.NORTH, days, 47, SpringLayout.NORTH, this);
-		appLayout.putConstraint(SpringLayout.WEST, days, 72, SpringLayout.WEST, this);
 		appLayout.putConstraint(SpringLayout.EAST, days, -40, SpringLayout.EAST, this);
 		appLayout.putConstraint(SpringLayout.NORTH, yearInput, 6, SpringLayout.SOUTH, monthInput);
 		appLayout.putConstraint(SpringLayout.WEST, yearInput, 0, SpringLayout.WEST, monthInput);
@@ -106,12 +115,7 @@ public class CalMasterPanel extends JPanel
 		appLayout.putConstraint(SpringLayout.EAST, inputInfoYear, 0, SpringLayout.EAST, inputInfoMonth);
 		appLayout.putConstraint(SpringLayout.SOUTH, inputInfoYear, -10, SpringLayout.SOUTH, this);
 		appLayout.putConstraint(SpringLayout.NORTH, changeValues, 0, SpringLayout.NORTH, monthInput);
-		appLayout.putConstraint(SpringLayout.EAST, changeValues, 0, SpringLayout.EAST, yearLabel);
-		appLayout.putConstraint(SpringLayout.NORTH, yearLabel, 0, SpringLayout.NORTH, monthLabel);
-		appLayout.putConstraint(SpringLayout.EAST, yearLabel, 0, SpringLayout.EAST, days);
 		appLayout.putConstraint(SpringLayout.SOUTH, days, -30, SpringLayout.NORTH, monthInput);
-		appLayout.putConstraint(SpringLayout.WEST, monthLabel, 0, SpringLayout.WEST, days);
-		appLayout.putConstraint(SpringLayout.SOUTH, monthLabel, -1, SpringLayout.NORTH, days);
 
 	}
 
