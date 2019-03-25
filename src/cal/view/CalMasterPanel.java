@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 public class CalMasterPanel extends JPanel
 {
 	private CalController app;
-	
+
 	private JLabel monthLabel;
 	private JTextField monthInput;
 	private JTextField yearInput;
@@ -20,34 +20,35 @@ public class CalMasterPanel extends JPanel
 	private JLabel inputInfoYear;
 	private JLabel inputInfoMonth;
 	private SpringLayout appLayout;
-	
+	private Box daysInWeek;
+
 	public CalMasterPanel(CalController app)
 	{
 		super();
-		
+
 		this.app = app;
-		
+
 		appLayout = new SpringLayout();
-		
+
 		days = new DisplayDays(app);
-		
+
 		monthLabel = new JLabel(app.getMonth());
-		
+
 		monthInput = new JTextField();
 		yearLabel = new JLabel(app.getYear());
-		
+
 		changeValues = new JButton("Change date");
 		inputInfoYear = new JLabel("Year:");
 		inputInfoMonth = new JLabel("Month:");
 		yearInput = new JTextField();
 		
+
 		setupPanel();
 		setupListeners();
 		setupLayout();
-		
-		
+
 	}
-	
+
 	private void setupPanel()
 	{
 		this.setLayout(appLayout);
@@ -61,26 +62,26 @@ public class CalMasterPanel extends JPanel
 		this.add(inputInfoMonth);
 		this.add(changeValues);
 		this.add(days);
-		
-		
+
+
 	}
-	
+
 	private void setupListeners()
 	{
 		changeValues.addActionListener(new ActionListener()
-				{
-					public void actionPerformed(ActionEvent click)
-					{
-						String yearData = yearInput.getText();
-						String monthData = monthInput.getText();
-						app.sendCalendarData(monthData, yearData);
-						yearInput.setText("");
-						monthInput.setText("");
-						updateDisplayInfo();
-					}
-				});
+		{
+			public void actionPerformed(ActionEvent click)
+			{
+				String yearData = yearInput.getText();
+				String monthData = monthInput.getText();
+				app.sendCalendarData(monthData, yearData);
+				yearInput.setText("");
+				monthInput.setText("");
+				updateDisplayInfo();
+			}
+		});
 	}
-	
+
 	protected void updateDisplayInfo()
 	{
 		ArrayList<String> updatedDays = app.getCalendarDays();
@@ -88,7 +89,7 @@ public class CalMasterPanel extends JPanel
 		yearLabel.setText(app.getYear());
 		days.updateDays(updatedDays);
 	}
-	
+
 	private void setupLayout()
 	{
 		appLayout.putConstraint(SpringLayout.NORTH, days, 47, SpringLayout.NORTH, this);
@@ -111,8 +112,7 @@ public class CalMasterPanel extends JPanel
 		appLayout.putConstraint(SpringLayout.SOUTH, days, -30, SpringLayout.NORTH, monthInput);
 		appLayout.putConstraint(SpringLayout.WEST, monthLabel, 0, SpringLayout.WEST, days);
 		appLayout.putConstraint(SpringLayout.SOUTH, monthLabel, -1, SpringLayout.NORTH, days);
-		
-		
+
 	}
 
 }

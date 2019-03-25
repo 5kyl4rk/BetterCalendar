@@ -113,6 +113,7 @@ public class Calendar
 	{
 		int monthNumber = 0;
 		boolean isNumber = false;
+		input = input.trim();
 
 		if (input == null || input.equals(""))
 		{
@@ -124,7 +125,7 @@ public class Calendar
 			for (int index = 1; index < monthList.size(); index++)
 			{
 				String currentMonth = monthList.get(index).toLowerCase();
-				if (input.toLowerCase().equals(currentMonth) || (!input.equals("ma") && currentMonth.startsWith(input)))
+				if (input.equalsIgnoreCase(currentMonth) || (!input.equals("ma") && currentMonth.startsWith(input)))
 				{
 					setMonth(index);
 					setValidMonth(true);
@@ -182,7 +183,7 @@ public class Calendar
 		{
 			try
 			{
-				yearNumber = Integer.parseInt(input);
+				yearNumber = Integer.parseInt(input.trim());
 				isNumber = true;
 			}
 			catch (NumberFormatException nope)
