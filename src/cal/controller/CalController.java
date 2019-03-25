@@ -20,7 +20,10 @@ public class CalController
 	public void start()
 	{
 		//System.out.println(appCalendar.printDayArray());
-		//inputData();
+		inputData();
+		appFrame.updateDisplay();
+		appFrame.setVisiblity(true);
+		
 		//JOptionPane.showMessageDialog(null,appCalendar);
 		//System.out.println(appCalendar);
 	}

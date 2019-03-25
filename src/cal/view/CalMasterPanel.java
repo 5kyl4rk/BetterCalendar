@@ -44,6 +44,8 @@ public class CalMasterPanel extends JPanel
 		setupPanel();
 		setupListeners();
 		setupLayout();
+		
+		
 	}
 	
 	private void setupPanel()
@@ -79,7 +81,7 @@ public class CalMasterPanel extends JPanel
 				});
 	}
 	
-	private void updateDisplayInfo()
+	protected void updateDisplayInfo()
 	{
 		ArrayList<String> updatedDays = app.getCalendarDays();
 		monthLabel.setText(app.getMonth());
