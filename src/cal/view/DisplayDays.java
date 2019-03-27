@@ -4,6 +4,8 @@ import cal.controller.CalController;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -31,6 +33,7 @@ public class DisplayDays extends JPanel
 		}
 		
 		setupPanel();
+		setupListeners();
 	}
 	
 	public DisplayDays(CalController app, ArrayList<String> days)
@@ -61,6 +64,26 @@ public class DisplayDays extends JPanel
 		
 	}
 	
+	private void setupListeners()
+	{
+		for(int index = 0; index < daysLabel.size(); index ++)
+		{
+			int current = index;
+			daysLabel.get(index).addMouseListener(new MouseAdapter()
+					{
+						public void mouseClicked(MouseEvent click)
+						{
+							JLabel og = (JLabel) click.getComponent();
+							og.setBackground(Color.RED);
+						}
+					});
+		}
+	}
+	
+	private void changeColor(int index)
+	{
+		daysLabel.get(index).setBackground(new Color(255,0,0));
+	}
 	public void updateDays(ArrayList<String> days)
 	{
 		int updateRow = days.size()/7;
@@ -77,5 +100,6 @@ public class DisplayDays extends JPanel
 			daysLabel.get(index).setBorder(labelBorder);
 			this.add(daysLabel.get(index));
 		}
+		setupListeners();
 	}
 }
