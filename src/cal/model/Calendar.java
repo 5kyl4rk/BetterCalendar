@@ -224,7 +224,7 @@ public class Calendar
 	 *            the year you want to check
 	 * @return true or false stating that it's a leap year
 	 */
-	private boolean isLeapYear(int year)
+	protected boolean isLeapYear(int year)
 	{
 		boolean isLeap = false;
 
@@ -251,7 +251,7 @@ public class Calendar
 	 * 
 	 * @return the number of days since that year
 	 */
-	private int addDaysSinceYear()
+	protected int addDaysSinceYear()
 	{
 		int daysSince = 0;
 		for (int currentYear = 1583; currentYear < year; currentYear++)
@@ -274,7 +274,7 @@ public class Calendar
 	 * 
 	 * @return the number of days since that year
 	 */
-	private int addDaysSinceMonth()
+	protected int addDaysSinceMonth()
 	{
 		int daysSince = 0;
 
@@ -293,7 +293,7 @@ public class Calendar
 	 *            the month you want to select
 	 * @return the number of days in that month
 	 */
-	private int daysInMonth(int month)
+	protected int daysInMonth(int month)
 	{
 		int numberOfDays = 0;
 
@@ -328,6 +328,7 @@ public class Calendar
 
 		return numberOfDays;
 	}
+	
 
 	//=====================
 	//Printing/Storing Days
