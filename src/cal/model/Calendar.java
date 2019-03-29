@@ -102,6 +102,10 @@ public class Calendar
 		months30Days[2] = 9;
 		months30Days[3] = 11;
 	}
+	
+	//==============
+	//Input Handling
+	//==============
 
 	/**
 	 * Takes input and process it, checks to see if it's valid, and stores it. <br>
@@ -209,7 +213,10 @@ public class Calendar
 			}
 		}
 	}
-
+	
+	//===================
+	//Calculating Methods
+	//===================
 	/**
 	 * Calculate if it's a leap year
 	 * 
@@ -238,6 +245,93 @@ public class Calendar
 
 		return isLeap;
 	}
+	
+	/**
+	 * adds up all the days before the store year
+	 * 
+	 * @return the number of days since that year
+	 */
+	private int addDaysSinceYear()
+	{
+		int daysSince = 0;
+		for (int currentYear = 1583; currentYear < year; currentYear++)
+		{
+			if (isLeapYear(currentYear))
+			{
+				daysSince += 366;
+			}
+			else
+			{
+				daysSince += 365;
+			}
+		}
+
+		return daysSince;
+	}
+
+	/**
+	 * adds up how many days have past before the current month in the given year
+	 * 
+	 * @return the number of days since that year
+	 */
+	private int addDaysSinceMonth()
+	{
+		int daysSince = 0;
+
+		for (int currentMonth = 1; currentMonth < month; currentMonth++)
+		{
+			daysSince += daysInMonth(currentMonth);
+		}
+
+		return daysSince;
+	}
+
+	/**
+	 * retrieves how many days are in that month
+	 * 
+	 * @param month
+	 *            the month you want to select
+	 * @return the number of days in that month
+	 */
+	private int daysInMonth(int month)
+	{
+		int numberOfDays = 0;
+
+		if (month == 2)
+		{
+			if (isLeapYear(year))
+			{
+				numberOfDays = 29;
+			}
+			else
+			{
+				numberOfDays = 28;
+			}
+		}
+		else
+		{
+			for (int indexedMonth : months31Days)
+			{
+				if (month == indexedMonth)
+				{
+					numberOfDays = 31;
+				}
+			}
+			for (int indexedMonth : months30Days)
+			{
+				if (month == indexedMonth)
+				{
+					numberOfDays = 30;
+				}
+			}
+		}
+
+		return numberOfDays;
+	}
+
+	//=====================
+	//Printing/Storing Days
+	//=====================
 
 	/**
 	 * Takes the information and converts it into a readable String
@@ -412,88 +506,6 @@ public class Calendar
 
 	}
 
-	/**
-	 * adds up all the days before the store year
-	 * 
-	 * @return the number of days since that year
-	 */
-	private int addDaysSinceYear()
-	{
-		int daysSince = 0;
-		for (int currentYear = 1583; currentYear < year; currentYear++)
-		{
-			if (isLeapYear(currentYear))
-			{
-				daysSince += 366;
-			}
-			else
-			{
-				daysSince += 365;
-			}
-		}
-
-		return daysSince;
-	}
-
-	/**
-	 * adds up how many days have past before the current month in the given year
-	 * 
-	 * @return the number of days since that year
-	 */
-	private int addDaysSinceMonth()
-	{
-		int daysSince = 0;
-
-		for (int currentMonth = 1; currentMonth < month; currentMonth++)
-		{
-			daysSince += daysInMonth(currentMonth);
-		}
-
-		return daysSince;
-	}
-
-	/**
-	 * retrieves how many days are in that month
-	 * 
-	 * @param month
-	 *            the month you want to select
-	 * @return the number of days in that month
-	 */
-	private int daysInMonth(int month)
-	{
-		int numberOfDays = 0;
-
-		if (month == 2)
-		{
-			if (isLeapYear(year))
-			{
-				numberOfDays = 29;
-			}
-			else
-			{
-				numberOfDays = 28;
-			}
-		}
-		else
-		{
-			for (int indexedMonth : months31Days)
-			{
-				if (month == indexedMonth)
-				{
-					numberOfDays = 31;
-				}
-			}
-			for (int indexedMonth : months30Days)
-			{
-				if (month == indexedMonth)
-				{
-					numberOfDays = 30;
-				}
-			}
-		}
-
-		return numberOfDays;
-	}
 
 	/**
 	 * calls {@link #makeDaysAsArray()} and prints the String stored in each spot.
@@ -525,8 +537,9 @@ public class Calendar
 	{
 		return printDays();
 	}
-
+	//===========
 	// --[GET]--
+	//===========
 	public int getMonth()
 	{
 		return month;
@@ -561,8 +574,9 @@ public class Calendar
 	{
 		return makeDaysAsList();
 	}
-
+	//===========
 	// --[SET]--
+	//===========
 	public void setMonth(int month)
 	{
 		this.month = month;
