@@ -20,7 +20,7 @@ public class CalController
 	public void start()
 	{
 		//System.out.println(appCalendar.printDayArray());
-		inputData();
+		firstInput();
 		appFrame.updateDisplay();
 		appFrame.setVisiblity(true);
 		
@@ -28,7 +28,7 @@ public class CalController
 		//System.out.println(appCalendar);
 	}
 	
-	private void inputData()
+	private void firstInput()
 	{
 		String inputMonth;
 		String inputYear;

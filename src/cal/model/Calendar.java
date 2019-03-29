@@ -72,8 +72,9 @@ public class Calendar
 	 * adds items to list, the indexes in 'monthList' matches the actual number of
 	 * the month, meaning '0' should not be reachable
 	 */
-	private void buildMonths() // index matches actual month
+	private void buildMonths() 
 	{
+		// index matches actual month
 		monthList.add(0, "Null-vember");
 		monthList.add(1, "January");
 		monthList.add(2, "February");
@@ -113,53 +114,57 @@ public class Calendar
 	{
 		int monthNumber = 0;
 		boolean isNumber = false;
-		input = input.trim();
+		input = input.trim().toLowerCase();
 
-		if (input == null || input.equals(""))
+		if (input == null || input.equals("")) //input can't be null/empty
 		{
 			app.errorManager(appError.getEmptyInput());
 		}
 		else
 		{
-			input = input.trim().toLowerCase();
-			for (int index = 1; index < monthList.size(); index++)
+			if (input.length() < 3) //input has to be greater than 2 to determine the month
 			{
-				String currentMonth = monthList.get(index).toLowerCase();
-				if (input.equalsIgnoreCase(currentMonth) || (!input.equals("ma") && currentMonth.startsWith(input)))
-				{
-					setMonth(index);
-					setValidMonth(true);
-				}
+				app.errorManager(appError.getTooShort());
 			}
-
-			if (!validMonth)
+			else
 			{
-				try
+				for (int index = 1; index < monthList.size(); index++) //look through the list to determine the month
 				{
-					monthNumber = Integer.parseInt(input);
-					isNumber = true;
-				}
-				catch (NumberFormatException wrong)
-				{
-					app.errorManager(appError.getNotAnInt());
+					String currentMonth = monthList.get(index).toLowerCase();
+					if (input.equalsIgnoreCase(currentMonth) || currentMonth.startsWith(input))
+					{
+						setMonth(index);
+						setValidMonth(true);
+					}
 				}
 
-				if (isNumber)
+				if (!validMonth) //if it still can't determine the month, check to see if the input is a number
 				{
-					if (monthNumber <= 0 || monthNumber > 12)
+					try
 					{
-						app.errorManager(appError.getInvalidMonth());
-						;
+						monthNumber = Integer.parseInt(input);
+						isNumber = true;
 					}
-					else
+					catch (NumberFormatException wrong)
 					{
-						setMonth(monthNumber);
-						setValidMonth(true);
+						app.errorManager(appError.getNotAnInt());
+					}
+
+					if (isNumber)
+					{
+						if (monthNumber <= 0 || monthNumber > 12) //check to see if it's in a valid range
+						{
+							app.errorManager(appError.getInvalidMonth());
+						}
+						else
+						{
+							setMonth(monthNumber);
+							setValidMonth(true);
+						}
 					}
 				}
 			}
 		}
-
 	}
 
 	/**
@@ -218,7 +223,7 @@ public class Calendar
 
 		if (year % 4 == 0)
 		{
-			if (year % 100 == 0)
+			if (year % 100 == 0) //if it's a century year then check to see if it's divisible by 400
 			{
 				if (year % 400 == 0)
 				{
