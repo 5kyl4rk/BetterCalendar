@@ -1,6 +1,5 @@
-package cal.controller;
+package cal.model;
 
-import cal.model.Calendar;
 import cal.controller.CalController;
 
 public class Day extends Calendar
@@ -37,7 +36,23 @@ public class Day extends Calendar
 	public int calculateDaysBetween(Day start, Day end)
 	{
 		int daySince = 0;
-		
+		boolean sameYear = start.getYear() == end.getYear();
+		boolean sameMonth = start.getMonth() == end.getMonth();
+		if(sameYear)
+		{
+			if(sameMonth)
+			{
+				daySince = Math.abs((start.getDay()-end.getDay()));
+			}
+			else
+			{
+				daySince = Math.abs((start.addDaysSinceMonth()+start.getDay()) - (end.addDaysSinceMonth()+end.getDay()));
+			}
+		}
+		else
+		{
+			daySince = Math.abs((start.addDaysSinceYear()+start.addDaysSinceMonth()+start.getDay()) - (end.addDaysSinceYear()+end.addDaysSinceMonth()+end.getDay()));
+		}
 		return daySince;
 	}
 	public String toString()
