@@ -21,6 +21,7 @@ public class CalMasterPanel extends JPanel
 	private JLabel inputInfoMonth;
 	private SpringLayout appLayout;
 	private DaysInWeek weekDays;
+	private JButton timeSince;
 
 	public CalMasterPanel(CalController app)
 	{
@@ -47,11 +48,11 @@ public class CalMasterPanel extends JPanel
 		appLayout.putConstraint(SpringLayout.EAST, yearLabel, 0, SpringLayout.EAST, days);
 
 		changeValues = new JButton("Change date");
+		timeSince = new JButton("Calculate");
 		appLayout.putConstraint(SpringLayout.WEST, changeValues, 75, SpringLayout.EAST, monthInput);
 		inputInfoYear = new JLabel("Year:");
 		inputInfoMonth = new JLabel("Month:");
 		yearInput = new JTextField();
-		
 
 		setupPanel();
 		setupListeners();
@@ -71,9 +72,9 @@ public class CalMasterPanel extends JPanel
 		this.add(inputInfoYear);
 		this.add(inputInfoMonth);
 		this.add(changeValues);
+		this.add(timeSince);
 		this.add(days);
 		this.add(weekDays);
-
 
 	}
 
@@ -89,6 +90,14 @@ public class CalMasterPanel extends JPanel
 				yearInput.setText("");
 				monthInput.setText("");
 				updateDisplayInfo();
+			}
+		});
+
+		timeSince.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent click)
+			{
+				
 			}
 		});
 	}
