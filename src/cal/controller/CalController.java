@@ -69,6 +69,11 @@ public class CalController
 		return appCalendar.getYear() + "";
 	}
 	
+	public CalFrame getFrame()
+	{
+		return appFrame;
+	}
+	
 	public void errorManager(Exception problem)
 	{
 		JOptionPane.showMessageDialog(appFrame, problem.getMessage(), "[ERROR]: "+problem.getCause().getMessage(),JOptionPane.ERROR_MESSAGE);

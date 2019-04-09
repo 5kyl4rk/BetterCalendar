@@ -2,6 +2,8 @@ package cal.view;
 
 import cal.controller.CalController;
 import javax.swing.*;
+
+import java.awt.Container;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -16,11 +18,12 @@ public class CalMasterPanel extends JPanel
 	private JTextField yearInput;
 	private JLabel yearLabel;
 	private JButton changeValues;
-	private DisplayDays days;
 	private JLabel inputInfoYear;
 	private JLabel inputInfoMonth;
 	private SpringLayout appLayout;
 	private DaysInWeek weekDays;
+	private DisplayDays days;
+	private InputDays infoPopup;
 	private JButton timeSince;
 
 	public CalMasterPanel(CalController app)
@@ -35,6 +38,7 @@ public class CalMasterPanel extends JPanel
 		appLayout.putConstraint(SpringLayout.NORTH, days, 75, SpringLayout.NORTH, this);
 		appLayout.putConstraint(SpringLayout.WEST, days, 40, SpringLayout.WEST, this);
 		weekDays = new DaysInWeek();
+		infoPopup = new InputDays(app);
 		appLayout.putConstraint(SpringLayout.WEST, weekDays, 0, SpringLayout.WEST, days);
 		appLayout.putConstraint(SpringLayout.SOUTH, weekDays, -6, SpringLayout.NORTH, days);
 		appLayout.putConstraint(SpringLayout.EAST, weekDays, 0, SpringLayout.EAST, days);
@@ -49,11 +53,14 @@ public class CalMasterPanel extends JPanel
 
 		changeValues = new JButton("Change date");
 		timeSince = new JButton("Calculate");
+		appLayout.putConstraint(SpringLayout.WEST, timeSince, 0, SpringLayout.WEST, changeValues);
+		appLayout.putConstraint(SpringLayout.EAST, timeSince, 0, SpringLayout.EAST, changeValues);
 		appLayout.putConstraint(SpringLayout.WEST, changeValues, 75, SpringLayout.EAST, monthInput);
 		inputInfoYear = new JLabel("Year:");
 		inputInfoMonth = new JLabel("Month:");
 		yearInput = new JTextField();
-
+		appLayout.putConstraint(SpringLayout.NORTH, timeSince, 0, SpringLayout.NORTH, yearInput);
+		
 		setupPanel();
 		setupListeners();
 		setupLayout();
@@ -97,7 +104,7 @@ public class CalMasterPanel extends JPanel
 		{
 			public void actionPerformed(ActionEvent click)
 			{
-				
+				JOptionPane.showMessageDialog(app.getFrame(),infoPopup);
 			}
 		});
 	}

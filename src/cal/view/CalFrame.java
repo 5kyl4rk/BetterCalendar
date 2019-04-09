@@ -26,6 +26,7 @@ public class CalFrame extends JFrame
 		this.setSize(500, 500);
 		this.setVisible(false);
 		this.setResizable(true);
+		this.setLocationRelativeTo(null);
 		this.setMinimumSize(new Dimension(500,500));
 		this.setTitle("Calendar");
 	}
