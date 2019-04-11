@@ -105,7 +105,7 @@ public class CalMasterPanel extends JPanel
 			public void actionPerformed(ActionEvent click)
 			{
 				String[] option = {"Calculate"};
-				JOptionPane.showOptionDialog(app.getFrame(),infoPopup, "Day Calculator", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, option, option[0]);
+				int response = JOptionPane.showOptionDialog(app.getFrame(),infoPopup, "Day Calculator", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, option, option[0]);
 			}
 		});
 	}
