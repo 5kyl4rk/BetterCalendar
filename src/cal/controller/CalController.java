@@ -4,17 +4,22 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 import cal.model.Calendar;
+import cal.model.Day;
 import cal.view.CalFrame;
 
 public class CalController
 {
 	private Calendar appCalendar;
 	private CalFrame appFrame;
+	private Day start;
+	private Day end;
 	
 	public CalController()
 	{
 		appCalendar = new Calendar(this);
 		appFrame = new CalFrame(this);
+		start = new Day(this);
+		end = new Day(this);
 	}
 
 	public void start()
@@ -53,6 +58,14 @@ public class CalController
 		appCalendar.processMonth(month);
 		appCalendar.processYear(year);
 	}
+	
+	public void sendStartDate(String month, String year, String day)
+	{
+		start.processMonth(month);
+		start.processYear(day);
+		start.setDay(day);
+	}
+	
 	
 	public ArrayList<String> getCalendarDays()
 	{

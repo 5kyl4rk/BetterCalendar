@@ -79,4 +79,13 @@ public class Day extends Calendar
 			this.day = temp.getDay();
 		}
 	}
+	
+	public void setDay(int day)
+	{
+		this.day = day;
+		if(!validDay(this))
+		{
+			this.day = 0;
+		}
+	}
 }
