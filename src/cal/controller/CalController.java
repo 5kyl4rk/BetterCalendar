@@ -79,5 +79,10 @@ public class CalController
 		JOptionPane.showMessageDialog(appFrame, problem.getMessage(), "[ERROR]: "+problem.getCause().getMessage(),JOptionPane.ERROR_MESSAGE);
 	}
 	
+	public void errorManager(int errorCode)
+	{
+		
+	}
+	
 
 }

@@ -8,6 +8,12 @@ public class Day extends Calendar
 	private int day;
 	private int month;
 	private int year;
+	
+	public Day(CalController appController)
+	{
+		super(appController);
+		this.day = 0;
+	}
 
 	public Day(int month, int year, int day, CalController appController)
 	{
