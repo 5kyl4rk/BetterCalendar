@@ -106,6 +106,10 @@ public class CalMasterPanel extends JPanel
 			{
 				String[] option = {"Calculate"};
 				int response = JOptionPane.showOptionDialog(app.getFrame(),infoPopup, "Day Calculator", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, option, option[0]);
+				if (response == 0)
+				{
+					
+				}
 			}
 		});
 	}

@@ -72,7 +72,7 @@ public class Calendar
 	 * adds items to list, the indexes in 'monthList' matches the actual number of
 	 * the month, meaning '0' should not be reachable
 	 */
-	private void buildMonths() 
+	private void buildMonths()
 	{
 		// index matches actual month
 		monthList.add(0, "Null-vember");
@@ -102,10 +102,10 @@ public class Calendar
 		months30Days[2] = 9;
 		months30Days[3] = 11;
 	}
-	
-	//==============
-	//Input Handling
-	//==============
+
+	// ==============
+	// Input Handling
+	// ==============
 
 	/**
 	 * Takes input and process it, checks to see if it's valid, and stores it. <br>
@@ -118,54 +118,68 @@ public class Calendar
 	{
 		int monthNumber = 0;
 		boolean isNumber = false;
-		input = input.trim().toLowerCase();
+		boolean tooShort = false;
 
-		if (input == null || input.equals("")) //input can't be null/empty
+		if (input == null || input.equals("")) // input can't be null/empty
 		{
 			app.errorManager(appError.getEmptyInput());
 		}
 		else
 		{
-			if (input.length() < 3) //input has to be greater than 2 to determine the month
+			input = input.trim().toLowerCase();
+			try
 			{
-				app.errorManager(appError.getTooShort());
+				monthNumber = Integer.parseInt(input);
+				isNumber = true;
 			}
-			else
+			catch (NumberFormatException wrong)
 			{
-				for (int index = 1; index < monthList.size(); index++) //look through the list to determine the month
+				isNumber = false;
+			}
+
+			if (!isNumber)
+			{
+				if (input.length() < 3) // input has to be greater than 2 to determine the month
 				{
-					String currentMonth = monthList.get(index).toLowerCase();
-					if (input.equalsIgnoreCase(currentMonth) || currentMonth.startsWith(input))
-					{
-						setMonth(index);
-						setValidMonth(true);
-					}
+					tooShort = true;
 				}
-
-				if (!validMonth) //if it still can't determine the month, check to see if the input is a number
+				else
 				{
-					try
+					for (int index = 1; index < monthList.size(); index++) // look through the list to determine the month
 					{
-						monthNumber = Integer.parseInt(input);
-						isNumber = true;
-					}
-					catch (NumberFormatException wrong)
-					{
-						app.errorManager(appError.getNotAnInt());
-					}
-
-					if (isNumber)
-					{
-						if (monthNumber <= 0 || monthNumber > 12) //check to see if it's in a valid range
+						String currentMonth = monthList.get(index).toLowerCase();
+						if ((input.equalsIgnoreCase(currentMonth) || currentMonth.startsWith(input)))
 						{
-							app.errorManager(appError.getInvalidMonth());
-						}
-						else
-						{
-							setMonth(monthNumber);
+							setMonth(index);
 							setValidMonth(true);
 						}
 					}
+				}
+			}
+
+			if (!validMonth) // if it still can't determine the month, check to see if the input is a number
+			{
+
+				if (isNumber)
+				{
+					if (monthNumber <= 0 || monthNumber > 12) // check to see if it's in a valid range
+					{
+						app.errorManager(appError.getInvalidMonth());
+					}
+					else
+					{
+						setMonth(monthNumber);
+						setValidMonth(true);
+					}
+				}
+				else if (tooShort)
+				{
+					app.errorManager(appError.getTooShort());
+	
+				}
+				else
+				{
+					app.errorManager(appError.getNotAnInt());
 				}
 			}
 		}
@@ -213,10 +227,10 @@ public class Calendar
 			}
 		}
 	}
-	
-	//===================
-	//Calculating Methods
-	//===================
+
+	// ===================
+	// Calculating Methods
+	// ===================
 	/**
 	 * Calculate if it's a leap year
 	 * 
@@ -230,7 +244,7 @@ public class Calendar
 
 		if (year % 4 == 0)
 		{
-			if (year % 100 == 0) //if it's a century year then check to see if it's divisible by 400
+			if (year % 100 == 0) // if it's a century year then check to see if it's divisible by 400
 			{
 				if (year % 400 == 0)
 				{
@@ -245,7 +259,7 @@ public class Calendar
 
 		return isLeap;
 	}
-	
+
 	/**
 	 * adds up all the days before the store year
 	 * 
@@ -328,11 +342,10 @@ public class Calendar
 
 		return numberOfDays;
 	}
-	
 
-	//=====================
-	//Printing/Storing Days
-	//=====================
+	// =====================
+	// Printing/Storing Days
+	// =====================
 
 	/**
 	 * Takes the information and converts it into a readable String
@@ -507,7 +520,6 @@ public class Calendar
 
 	}
 
-
 	/**
 	 * calls {@link #makeDaysAsArray()} and prints the String stored in each spot.
 	 * Prints very similar to {@link #printDays()}
@@ -538,9 +550,10 @@ public class Calendar
 	{
 		return printDays();
 	}
-	//===========
+
+	// ===========
 	// --[GET]--
-	//===========
+	// ===========
 	public int getMonth()
 	{
 		return month;
@@ -575,9 +588,10 @@ public class Calendar
 	{
 		return makeDaysAsList();
 	}
-	//===========
+
+	// ===========
 	// --[SET]--
-	//===========
+	// ===========
 	public void setMonth(int month)
 	{
 		this.month = month;

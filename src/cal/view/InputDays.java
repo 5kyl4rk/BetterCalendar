@@ -39,14 +39,11 @@ public class InputDays extends JPanel
 		endMonth = new JLabel("Month:");
 		endYear = new JLabel("Year:");
 		endDay = new JLabel("Day:");
-		
 		startMonthInput = new JTextField();
 		startYearInput = new JTextField();
 		startDayInput = new JTextField();
 		endMonthInput = new JTextField();
-	
 		endYearInput = new JTextField();
-		
 		endDayInput = new JTextField();
 		
 		
