@@ -15,7 +15,7 @@ public class Calendar
 	private boolean validYear;
 	private int[] months31Days;
 	private int[] months30Days;
-	private CalendarErrors appError;
+	protected CalendarErrors appError;
 	private CalController app;
 
 	public Calendar(CalController appController)

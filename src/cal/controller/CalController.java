@@ -63,9 +63,15 @@ public class CalController
 	{
 		start.processMonth(month);
 		start.processYear(day);
-		start.setDay(day);
+		start.processDay(day);
 	}
 	
+	public void sendEndDate(String month, String year, String day)
+	{
+		end.processMonth(month);
+		end.processYear(year);
+		end.processDay(day);
+	}
 	
 	public ArrayList<String> getCalendarDays()
 	{

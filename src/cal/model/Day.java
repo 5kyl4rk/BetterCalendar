@@ -6,13 +6,14 @@ public class Day extends Calendar
 {
 	private CalController appController;
 	private int day;
-	private int month;
-	private int year;
+	private Exception invalidDay;
 	
 	public Day(CalController appController)
 	{
 		super(appController);
 		this.day = 0;
+		
+		invalidDay = new Exception("Day does not exist, try again",new Throwable("Not a real date"));
 	}
 
 	public Day(int month, int year, int day, CalController appController)
@@ -20,6 +21,7 @@ public class Day extends Calendar
 		super(month, year, appController);
 		this.appController = appController;
 		this.day = day;
+		invalidDay = new Exception("Day does not exist, try again",new Throwable("Not a real date"));
 		if(!validDay(this))
 		{
 			this.day = 0;
@@ -35,6 +37,10 @@ public class Day extends Calendar
 		if(test > 0 && test <= maxDays)
 		{
 			isValid = true;
+		}
+		else
+		{
+			appController.errorManager(invalidDay);
 		}
 		return isValid;
 	}
@@ -69,6 +75,29 @@ public class Day extends Calendar
 	public int getDay()
 	{
 		return day;
+	}
+	
+	public void processDay(String input)
+	{
+
+		if(input == null || input.trim().equals(""))
+		{
+			appController.errorManager(appError.getEmptyInput());
+		}
+		else
+		{
+			input = input.trim();
+			try
+			{
+				int dayToSet = Integer.parseInt(input);
+				this.setDay(dayToSet);
+			}
+			catch(NumberFormatException nope)
+			{
+				appController.errorManager(appError.getNotAnInt());
+			}
+		}
+		
 	}
 
 	public void setDay(int month, int year, int day, CalController app)

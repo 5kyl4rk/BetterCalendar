@@ -73,6 +73,11 @@ public class InputDays extends JPanel
 		
 	}
 	
+	public void sendDataToController()
+	{
+		app.sendStartDate(startMonthInput.getText(),startYearInput.getText(),startDayInput.getText());
+		app.sendEndDate(endMonthInput.getText(),endYearInput.getText(),endDayInput.getText());
+	}
 	public void setupLayout()
 	{
 		this.setPreferredSize(new Dimension (450,300));
