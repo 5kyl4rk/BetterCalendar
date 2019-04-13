@@ -73,6 +73,11 @@ public class CalController
 		end.processDay(day);
 	}
 	
+	public int getCalculatedDay()
+	{
+		return start.calculateDaysBetween(start,end);
+	}
+	
 	public ArrayList<String> getCalendarDays()
 	{
 		return appCalendar.getDayList();

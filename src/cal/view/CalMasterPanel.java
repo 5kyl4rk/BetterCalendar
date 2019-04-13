@@ -109,6 +109,7 @@ public class CalMasterPanel extends JPanel
 				if (response == 0)
 				{
 					infoPopup.sendDataToController();
+					JOptionPane.showMessageDialog(app.getFrame(),app.getCalculatedDay());
 				}
 			}
 		});
