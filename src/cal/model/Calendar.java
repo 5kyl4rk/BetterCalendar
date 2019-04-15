@@ -135,8 +135,11 @@ public class Calendar
 		boolean tooShort = false;
 
 		if (input == null || input.equals("")) // input can't be null/empty
-		{
+		{	
+			if(showErrors)
+			{
 			app.errorManager(appError.getEmptyInput());
+			}
 		}
 		else
 		{
@@ -178,7 +181,11 @@ public class Calendar
 				{
 					if (monthNumber <= 0 || monthNumber > 12) // check to see if it's in a valid range
 					{
+						if(showErrors)
+						{
 						app.errorManager(appError.getInvalidMonth());
+					
+						}
 					}
 					else
 					{
@@ -188,12 +195,17 @@ public class Calendar
 				}
 				else if (tooShort)
 				{
+					if(showErrors)
+					{
 					app.errorManager(appError.getTooShort());
-	
+					}
 				}
 				else
-				{
+				{	
+					if(showErrors)
+					{
 					app.errorManager(appError.getNotAnInt());
+					}
 				}
 			}
 		}
@@ -209,12 +221,30 @@ public class Calendar
 	 */
 	public void processYear(String input)
 	{
+		processYear(input, true);
+	}
+	
+	/**
+	 * Takes input and process it, checks to see if it's valid, and stores it. <br>
+	 * <b>(Year can't be before 1583)</b>
+	 * 
+	 * @param input
+	 *            the input you need to check to see if it's a valid year
+	 * @param showErrors
+	 * If you want to show popups or not
+	 * 
+	 */
+	public void processYear(String input, boolean showErrors)
+	{
 		int yearNumber = 0;
 		boolean isNumber = false;
 
 		if (input == null || input.equals(""))
 		{
+			if(showErrors)
+			{
 			app.errorManager(appError.getEmptyInput());
+			}
 		}
 		else
 		{
@@ -225,13 +255,19 @@ public class Calendar
 			}
 			catch (NumberFormatException nope)
 			{
+				if(showErrors)
+				{
 				app.errorManager(appError.getNotAnInt());
+				}
 			}
 			if (isNumber)
 			{
 				if (yearNumber < 1583)
 				{
+					if(showErrors)
+					{
 					app.errorManager(appError.getInvalidYear());
+					}
 				}
 				else
 				{

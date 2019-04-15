@@ -13,7 +13,7 @@ public class Day extends Calendar
 		super(appController);
 		this.day = 0;
 		this.appController = appController;
-		invalidDay = new Exception("Day does not exist, try again",new Throwable("Not a real date"));
+		invalidDay = new Exception(this.getMonth() + "//" +day + "//" + this.getYear() +" not exist, try again",new Throwable("Not a real date"));
 	}
 
 	public Day(int month, int year, int day, CalController appController)
@@ -21,7 +21,7 @@ public class Day extends Calendar
 		super(month, year, appController);
 		this.appController = appController;
 		this.day = day;
-		invalidDay = new Exception("Day does not exist, try again",new Throwable("Not a real date"));
+		invalidDay = new Exception(month + "//" +day + "//" + year +" not exist, try again",new Throwable("Not a real date"));
 		if(!validDay(this))
 		{
 			this.day = 0;
