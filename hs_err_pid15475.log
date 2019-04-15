@@ -1,0 +1,32 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  SIGSEGV (0xb) at pc=0x0000000110fed7bf, pid=15475, tid=22787
+#
+# JRE version: Java(TM) SE Runtime Environment (10.0.1+10) (build 10.0.1+10)
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (10.0.1+10, mixed mode, tiered, compressed oops, g1 gc, bsd-amd64)
+# Problematic frame:
+# C  [libjimage.dylib+0x17bf]  ImageStrings::find(Endian*, char const*, int*, unsigned int)+0x57
+#
+# No core dump will be written. Core dumps have been disabled. To enable core dumping, try "ulimit -c unlimited" before starting Java again
+#
+# If you would like to submit a bug report, please visit:
+#   http://bugreport.java.com/bugreport/crash.jsp
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -agentlib:jdwp=transport=dt_socket,suspend=y,address=localhost:57081 -javaagent:/Users/sfit1864/Desktop/Eclipse.app/Contents/Eclipse/configuration/org.eclipse.osgi/231/0/.cp/lib/javaagent-shaded.jar -Dfile.encoding=UTF-8 cal.controller.CalRunner
+
+Host: iMac14,3 x86_64 2900 MHz, 4 cores, 8G, Darwin 17.7.0
+Time: Mon Apr 15 11:41:14 2019 MDT elapsed time: 55 seconds (0d 0h 0m 55s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00007fedda04c000):  JavaThread "Signal Dispatcher" daemon [_thread_in_vm, id=22787, stack(0x000070000cc1b000,0x000070000cd1b000)]
+
+Stack: [0x000070000cc1b000,0x000070000cd1b000],  sp=0x000070000cd19270,  free space=1016k
+Native frames: (J=compiled Java code, A=aot compiled Java code, j=interpreted, Vv=VM code, C=native code)
+C  [libjimage.dylib+0x17bf]  ImageStrings::find(Endian*, char const*, int*, unsigned int)+0x57
+C  [libjimage.dylib+0x249d]  ImageFileReader::find_location_index(char const*, unsigned long long*) const+0x3f
+C  [libjimage.dylib+0x2831]  JIMAGE_FindResource+0xd7

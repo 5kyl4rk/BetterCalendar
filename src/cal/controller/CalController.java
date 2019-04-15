@@ -62,7 +62,7 @@ public class CalController
 	public void sendStartDate(String month, String year, String day)
 	{
 		start.processMonth(month);
-		start.processYear(day);
+		start.processYear(year);
 		start.processDay(day);
 	}
 	
