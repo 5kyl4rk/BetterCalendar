@@ -12,7 +12,7 @@ public class Day extends Calendar
 	{
 		super(appController);
 		this.day = 0;
-		
+		this.appController = appController;
 		invalidDay = new Exception("Day does not exist, try again",new Throwable("Not a real date"));
 	}
 
