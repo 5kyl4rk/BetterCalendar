@@ -106,7 +106,7 @@ public class Calendar
 	// ==============
 	// Input Handling
 	// ==============
-
+	
 	/**
 	 * Takes input and process it, checks to see if it's valid, and stores it. <br>
 	 * <b>(Month has to be between 1 & 12)</b>
@@ -115,6 +115,20 @@ public class Calendar
 	 *            the input you need to check to see if it's a valid month
 	 */
 	public void processMonth(String input)
+	{
+		processMonth(input, true);
+	}
+
+	/**
+	 * Takes input and process it, checks to see if it's valid, and stores it. <br>
+	 * <b>(Month has to be between 1 & 12)</b>
+	 * 
+	 * @param input
+	 *            the input you need to check to see if it's a valid month
+	 * @param showErrors
+	 * 	If you want to show popups or not
+	 */
+	public void processMonth(String input, boolean showErrors)
 	{
 		int monthNumber = 0;
 		boolean isNumber = false;
