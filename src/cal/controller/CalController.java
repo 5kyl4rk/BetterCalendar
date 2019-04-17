@@ -103,10 +103,13 @@ public class CalController
 		JOptionPane.showMessageDialog(appFrame, problem.getMessage(), "[ERROR]: "+problem.getCause().getMessage(),JOptionPane.ERROR_MESSAGE);
 	}
 	
-	public void errorManager(int errorCode)
+	public String getStartDate()
 	{
-		
+		return start.toString();
 	}
-	
+	public String getEndDate()
+	{
+		return end.toString();
+	}
 
 }

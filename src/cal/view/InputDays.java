@@ -76,7 +76,14 @@ public class InputDays extends JPanel
 	public void sendDataToController()
 	{
 		app.sendStartDate(startMonthInput.getText(),startYearInput.getText(),startDayInput.getText());
+		startMonthInput.setText("");
+		startYearInput.setText("");
+		startDayInput.setText("");
 		app.sendEndDate(endMonthInput.getText(),endYearInput.getText(),endDayInput.getText());
+		endMonthInput.setText("");
+		endYearInput.setText("");
+		endDayInput.setText("");
+		
 	}
 	public void setupLayout()
 	{

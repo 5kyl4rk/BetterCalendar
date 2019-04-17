@@ -109,7 +109,7 @@ public class CalMasterPanel extends JPanel
 				if (response == 0)
 				{
 					infoPopup.sendDataToController();
-					JOptionPane.showMessageDialog(app.getFrame(),app.getCalculatedDay());
+					JOptionPane.showMessageDialog(app.getFrame(),"There are " +app.getCalculatedDay() + " days between " + app.getStartDate() + " and " + app.getEndDate(),"Day",JOptionPane.DEFAULT_OPTION);
 				}
 			}
 		});
